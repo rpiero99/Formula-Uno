@@ -10,22 +10,28 @@ import java.util.stream.Stream;
  */
 public final class GridLocation {
 
-    private final int row;
     private final int column;
+    private final int row;
 
-    public GridLocation(int row, int column) {
-        this.row = row;
+    public GridLocation(int column, int row) {
         this.column = column;
-    }
-
-    public int getRow() {
-        return row;
+        this.row = row;
     }
 
     public int getColumn() {
         return column;
     }
 
+    public int getRow() {
+        return row;
+    }
+
+    /**
+     * Restituisce l'insieme delle locazioni adiacenti a questa locazione.
+     * @param width larghezza del GameField.
+     * @param height altezza del GameField.
+     * @return l'insieme delle locazioni adiacenti a questa locazione.
+     */
     public Set<GridLocation> getAdjacentLocations(int width, int height) {
         return Stream.of(this.aboveLeft(width, height),
                 this.above(width,height),
@@ -40,31 +46,83 @@ public final class GridLocation {
                 .collect(Collectors.toSet());
     }
 
-    private Optional<GridLocation> left(int width, int height) { return adjacent(width,height,0,-1); }
+    /**
+     * Restituisce la locazione a sinistra, se c'&egrave;.
+     * @param width larghezza del GameField.
+     * @param height altezza del GameField.
+     * @return la locazione a sinistra, se c'&egrave;.
+     */
+    private Optional<GridLocation> left(int width, int height) { return adjacent(width,height,-1,0); }
 
-    private Optional<GridLocation> belowLeft(int width, int height) {
-    }
+    /**
+     * Restituisce la locazione in basso a sinistra, se c'&egrave;.
+     * @param width larghezza del GameField.
+     * @param height altezza del GameField.
+     * @return la locazione in basso a sinistra, se c'&egrave;.
+     */
+    private Optional<GridLocation> belowLeft(int width, int height) { return adjacent(width, height,-1, -1);}
 
-    private Optional<GridLocation> below(int width, int height) { return adjacent(width,height,-1,0); }
+    /**
+     * Restituisce la locazione in basso al centro, se c'&egrave;.
+     * @param width larghezza del GameField.
+     * @param height altezza del GameField.
+     * @return la locazione in basso al centro, se c'&egrave;.
+     */
+    private Optional<GridLocation> below(int width, int height) { return adjacent(width,height,0,-1); }
 
-    private Optional<GridLocation> belowRight(int width, int height) {
-    }
+    /**
+     * Restituisce la locazione in basso a destra, se c'&egrave;.
+     * @param width larghezza del GameField.
+     * @param height altezza del GameField.
+     * @return la locazione in basso a destra, se c'&egrave;.
+     */
+    private Optional<GridLocation> belowRight(int width, int height) { return adjacent(width,height,+1, -1);}
 
-    private Optional<GridLocation> right(int width, int height) { return adjacent(width,height,0,+1); }
+    /**
+     * Restituisce la locazione a destra, se c'&egrave;.
+     * @param width larghezza del GameField.
+     * @param height altezza del GameField.
+     * @return la locazione a destra, se c'&egrave;.
+     */
+    private Optional<GridLocation> right(int width, int height) { return adjacent(width,height,+1,0); }
 
-    private Optional<GridLocation> aboveRight(int width, int height) {
-    }
+    /**
+     * Restituisce la locazione in alto a destra, se c'&egrave;.
+     * @param width larghezza del GameField.
+     * @param height altezza del GameField.
+     * @return la locazione in alto a destra, se c'&egrave;.
+     */
+    private Optional<GridLocation> aboveRight(int width, int height) { return adjacent(width, height, +1, +1);}
 
-    private Optional<GridLocation> above(int width, int height) { return adjacent(width,height,+1,0); }
+    /**
+     * Restituisce la locazione in alto al centro, se c'&egrave;.
+     * @param width larghezza del GameField.
+     * @param height altezza del GameField.
+     * @return la locazione in alto al centro, se c'&egrave;.
+     */
+    private Optional<GridLocation> above(int width, int height) { return adjacent(width,height,0,+1); }
 
-    private Optional<GridLocation> aboveLeft(int width, int height) {
-    }
+    /**
+     * Restituisce la locazione in alto a sinistra, se c'&egrave;.
+     * @param width larghezza del GameField.
+     * @param height altezza del GameField.
+     * @return la locazione in alto a sinistra, se c'&egrave;.
+     */
+    private Optional<GridLocation> aboveLeft(int width, int height) { return adjacent(width,height,-1,+1);}
 
-    private Optional<GridLocation> adjacent(int width, int height, int dr, int dc) {
-        int newR = row+dr;
-        int newC = column+dc;
-        if ((0<= newR)&&(newR<height)&&(0<=newC)&&(newC<width)) {
-            return Optional.of(new GridLocation(newR,newC));
+    /**
+     *
+     * @param width larghezza del GameField.
+     * @param height altezza del GameField.
+     * @param diffColumn differenza tra la colonna della locazione con quella della locazione richiesta.
+     * @param diffRow differenza tra la riga della locazione con quella della locazione richiesta.
+     * @return la locazione richiesta, se c'&egrave;
+     */
+    private Optional<GridLocation> adjacent(int width, int height, int diffColumn, int diffRow) {
+        int newCol = column +diffColumn;
+        int newRow = row +diffRow;
+        if ((0<= newCol)&&(newCol<width)&&(0<=newRow)&&(newRow<height)) {
+            return Optional.of(new GridLocation(newCol,newRow));
         } else {
             return Optional.empty();
         }

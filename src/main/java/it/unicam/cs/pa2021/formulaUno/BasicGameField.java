@@ -21,15 +21,15 @@ public class BasicGameField implements GameField<CornerStatus, GridLocation>{
         this.width = width;
         this.height = height;
         this.cornerGrid= new Corner[height][width];
-        for(int row=0; row<height;row++){
-            for(int col=0; col<width; col++)
-                this.cornerGrid[row][col] = new BasicCorner<>(this, CornerStatus.OUT_OF_RACE,new GridLocation(row,col));
+        for(int column=0; column<width;column++){
+            for(int row=0; row<height; row++)
+                this.cornerGrid[column][row] = new BasicCorner<>(this, CornerStatus.OUT_OF_RACE,new GridLocation(column,row));
         }
     }
 
     @Override
     public Corner<CornerStatus,GridLocation> getCornerAt(GridLocation location) {
-        return this.cornerGrid[location.getRow()][location.getColumn()];
+        return this.cornerGrid[location.getColumn()][location.getRow()];
     }
 
     @Override
