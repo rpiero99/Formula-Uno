@@ -9,7 +9,7 @@ public interface Corner<S,L> {
 
     /**
      * Restituisce il campo da gioco in cui si trova l'angolo.
-     * @return l campo da gioco in cui si trova l'angolo.
+     * @return il campo da gioco in cui si trova l'angolo.
      */
     GameField<S,L> getField();
 
