@@ -1,4 +1,4 @@
-# Formula-Uno
+# Formula Uno
 
 Formula 1 è un gioco di carta e matita a informazione completa di origine ignota e molto diffuso. In Italia è noto anche come automobilismo italiano, gara, la pista e altri nomi generici. Nei paesi anglofoni il nome più specifico è vector rally ("gara vettoriale"), ma si usano anche denominazioni generiche come pencil racing ("gara con la matita").
 
