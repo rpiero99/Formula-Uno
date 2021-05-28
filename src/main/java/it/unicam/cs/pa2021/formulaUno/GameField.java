@@ -7,7 +7,7 @@ import java.util.Set;
  * @param <S> tipo di stato di un angolo
  * @param <L> tipo per la posizione di un angolo
  */
-public interface GameField <S,L> {
+public interface GameField<S,L> {
 
     /**
      * Restituisce un angolo ad una certa locazione.
@@ -28,5 +28,6 @@ public interface GameField <S,L> {
      * @param moves le mosse dei giocatori.
      * @return il nuovo campo con l'applicazione delle mosse.
      */
-    GameField<S, L> nextStage(Move<S,L> moves);
+    GameField<S, L> nextStage(Set<Move<S,L>> moves);
+
 }

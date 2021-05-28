@@ -17,7 +17,6 @@ public class BasicCorner<S,L> implements Corner{
         this.location = location;
     }
 
-
     @Override
     public GameField<S,L> getField() {
         return this.field;

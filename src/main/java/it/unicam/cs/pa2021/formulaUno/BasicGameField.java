@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 /**
  * Classe che implementa l'interfaccia GameField; descrive un classico campo formato da una griglia.
  */
-public class BasicGameField implements GameField<CornerStatus, GridLocation>{
+public class BasicGameField implements GameField<CornerStatus, GridLocation> {
 
     private final Corner<CornerStatus, GridLocation> [][] cornerGrid;
     private final int width;
@@ -20,7 +20,7 @@ public class BasicGameField implements GameField<CornerStatus, GridLocation>{
     public BasicGameField(int width, int height) {
         this.width = width;
         this.height = height;
-        this.cornerGrid= new Corner[height][width];
+        this.cornerGrid= new BasicCorner[height][width];
         for(int column=0; column<width;column++){
             for(int row=0; row<height; row++)
                 this.cornerGrid[column][row] = new BasicCorner<>(this, CornerStatus.OUT_OF_RACE,new GridLocation(column,row));
@@ -42,13 +42,13 @@ public class BasicGameField implements GameField<CornerStatus, GridLocation>{
                 .map(this::getCornerAt)
                 .collect(Collectors.toSet());
     }
-
+/*
     private Set<GridLocation> getAdjacentLocations(GridLocation location) {
         return location.getAdjacentLocations(width,height);
-    }
+    }*/
 
     @Override
-    public GameField<CornerStatus,GridLocation> nextStage(Move moves) {
+    public GameField<CornerStatus,GridLocation> nextStage(Set<Move<CornerStatus, GridLocation>> moves) {
         return null;
     }
 }
