@@ -25,6 +25,7 @@ public interface Car<S, L> {
      */
     L getCurrentLocation();
 
+
     /**
      * Restituisce la precendente posizione occupata dal veicolo, utile per calcolare la prossima posizione.
      * @return la precendente posizione occupata dal veicolo.
@@ -32,7 +33,7 @@ public interface Car<S, L> {
     L getPreviousLocation();
 
     /**
-     * Sposta il veicolo in un'altra posizione.
+     * Sposta il veicolo in un'altra posizione ed aggiorna la posizione precedente.
      * @param location nuova posizione in cui si trover&agrave; il veicolo.
      */
     void moveToNewLocation(L location);
