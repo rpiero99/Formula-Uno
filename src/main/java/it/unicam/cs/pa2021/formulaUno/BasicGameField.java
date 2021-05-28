@@ -48,7 +48,7 @@ public class BasicGameField implements GameField<CornerStatus, GridLocation>{
     }
 
     @Override
-    public GameField<CornerStatus,GridLocation> nextMove(Move moves) {
+    public GameField<CornerStatus,GridLocation> nextStage(Move moves) {
         return null;
     }
 }

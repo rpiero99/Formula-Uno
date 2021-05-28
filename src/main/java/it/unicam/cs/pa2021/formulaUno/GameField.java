@@ -28,5 +28,5 @@ public interface GameField <S,L> {
      * @param moves le mosse dei giocatori.
      * @return il nuovo campo con l'applicazione delle mosse.
      */
-    GameField<S, L> nextMove(Move<S,L> moves);
+    GameField<S, L> nextStage(Move<S,L> moves);
 }

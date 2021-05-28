@@ -8,10 +8,10 @@ package it.unicam.cs.pa2021.formulaUno;
 public interface Car<S, L> {
 
     /**
-     * Restituisce la squadra di cui fa parte.
-     * @return la squadra di cui fa parte.
+     * Restituisce il giocatore proprietario del veicolo.
+     * @return il giocatore proprietario del veicolo.
      */
-    Team getTeam();
+    Player<S,L> getPlayer();
 
     /**
      * Restituisce il campo da gioco in cui si trova il veicolo.
@@ -24,6 +24,12 @@ public interface Car<S, L> {
      * @return la posizione attuale del veicolo.
      */
     L getCurrentLocation();
+
+    /**
+     * Restituisce la precendente posizione occupata dal veicolo, utile per calcolare la prossima posizione.
+     * @return la precendente posizione occupata dal veicolo.
+     */
+    L getPreviousLocation();
 
     /**
      * Sposta il veicolo in un'altra posizione.
