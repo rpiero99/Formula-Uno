@@ -1,5 +1,7 @@
 package it.unicam.cs.pa2021.formulaUno;
 
+import java.util.Set;
+
 /**
  * Interfaccia che definisce un giocatore di Formula Uno.
  * @param <S> tipo di stato di un angolo
@@ -18,4 +20,11 @@ public interface Player<S,L> {
      * @return il campo da gioco in cui gioca il giocatore.
      */
     GameField<S,L> getField();
+
+    /**
+     * Sposta il veicolo in una delle posizioni passate come parametro.
+     * @param possibleLocations posizioni candidate per essere attraversate dal veicolo.
+     * @return la posizione scelta per lo spostamento.
+     */
+    L moveCarTo(Set<L> possibleLocations);
 }
