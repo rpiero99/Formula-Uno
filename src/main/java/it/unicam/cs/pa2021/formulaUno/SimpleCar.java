@@ -23,7 +23,6 @@ public class SimpleCar implements Car<CornerStatus,GridLocation>{
         this.prevLocation = null;
     }
 
-
     @Override
     public Player<CornerStatus, GridLocation> getPlayer() {
         return player;
@@ -36,16 +35,18 @@ public class SimpleCar implements Car<CornerStatus,GridLocation>{
 
     @Override
     public GridLocation getCurrentLocation() {
-        return null;
+        return this.currLocation;
     }
 
     @Override
     public GridLocation getPreviousLocation() {
-        return null;
+        return this.prevLocation;
     }
 
     @Override
     public void moveToNewLocation(GridLocation location) {
-
+        this.prevLocation=currLocation;
+        this.currLocation=location;
     }
+
 }
