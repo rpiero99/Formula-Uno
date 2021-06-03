@@ -9,6 +9,7 @@ public class SimpleCar implements Car<CornerStatus,GridLocation>{
     private final GameField field;
     private GridLocation prevLocation;
     private GridLocation currLocation;
+    private boolean isInRace;
 
     /**
      * Creazione di un veicolo in una posizione di partenza
@@ -21,6 +22,7 @@ public class SimpleCar implements Car<CornerStatus,GridLocation>{
         this.field = field;
         this.currLocation = startingLocation;
         this.prevLocation = null;
+        this.isInRace = true;
     }
 
     @Override
@@ -47,6 +49,11 @@ public class SimpleCar implements Car<CornerStatus,GridLocation>{
     public void moveToNewLocation(GridLocation location) {
         this.prevLocation=currLocation;
         this.currLocation=location;
+    }
+
+    @Override
+    public boolean isInRace() {
+        return this.isInRace;
     }
 
 }

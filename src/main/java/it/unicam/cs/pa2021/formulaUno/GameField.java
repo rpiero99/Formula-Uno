@@ -7,7 +7,7 @@ import java.util.Set;
  * @param <S> tipo di stato di un angolo
  * @param <L> tipo per la posizione di un angolo
  */
-public interface GameField<S,L> {
+public interface GameField<S,L extends Location> {
 
     /**
      * Restituisce un angolo ad una certa locazione.
@@ -16,12 +16,7 @@ public interface GameField<S,L> {
      */
     Corner<S,L> getCornerAt(L location);
 
-    /**
-     * Restituisce l'insieme degli angoli vicini alla posizione data.
-     * @param location posizione nel campo da gioco.
-     * @return l'insieme degli angoli vicini alla posizione data.
-     */
-    Set<Corner<S,L>> getAdjacentCorners(L location);
+   // Set<L> getNextPossibleMoves (Car car);
 
     /**
      * Applica al campo da gioco le mosse fatte dai giocatori.

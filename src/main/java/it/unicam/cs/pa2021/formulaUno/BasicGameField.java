@@ -32,8 +32,12 @@ public class BasicGameField implements GameField<CornerStatus, GridLocation> {
         return this.cornerGrid[location.getColumn()][location.getRow()];
     }
 
-    @Override
-    public Set<Corner<CornerStatus,GridLocation>> getAdjacentCorners(GridLocation location) {
+    /**
+     * Restituisce l'insieme degli angoli vicini alla posizione data.
+     * @param location posizione nel campo da gioco.
+     * @return l'insieme degli angoli vicini alla posizione data.
+     */
+    private Set<Corner<CornerStatus,GridLocation>> getAdjacentCorners(GridLocation location) {
         return this.getCorners(location.getAdjacentLocations(width,height));
     }
 

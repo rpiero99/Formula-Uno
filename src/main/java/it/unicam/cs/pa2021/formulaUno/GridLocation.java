@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 /**
  * Classe che descrive una griglia come tipo di locazione per gli angoli di un Game Field.
  */
-public final class GridLocation {
+public class GridLocation implements Location {
 
     private final int column;
     private final int row;
@@ -24,6 +24,11 @@ public final class GridLocation {
 
     public int getRow() {
         return row;
+    }
+
+    @Override
+    public Set<Location> nextPossibleLocations(Car car) {
+        return null;
     }
 
     /**
@@ -127,4 +132,6 @@ public final class GridLocation {
             return Optional.empty();
         }
     }
+
+
 }
