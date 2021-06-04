@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 /**
  * Classe che descrive una griglia come tipo di locazione per gli angoli di un Game Field.
  */
-public class GridLocation implements Location {
+public class GridLocation{
 
     private final int column;
     private final int row;
@@ -26,8 +26,12 @@ public class GridLocation implements Location {
         return row;
     }
 
-    @Override
-    public Set<Location> nextPossibleLocations(Car car) {
+    /**
+     * Dato un veicolo, restituisce l'insieme delle posizioni che potrà avere il veicolo.
+     * @param car il veicolo di cui dobbiamo calcolare l'insieme delle posizioni successive.
+     * @return restituisce l'insieme delle posizioni che potrà avere il veicolo.
+     */
+    public Set<GridLocation> nextPossibleLocations(Car car) {
         return null;
     }
 
@@ -126,7 +130,7 @@ public class GridLocation implements Location {
     private Optional<GridLocation> adjacent(int width, int height, int diffColumn, int diffRow) {
         int newCol = column +diffColumn;
         int newRow = row +diffRow;
-        if ((0<= newCol)&&(newCol<width)&&(0<=newRow)&&(newRow<height)) {
+        if ((0<= newCol)&&(newCol<=width)&&(0<=newRow)&&(newRow<=height)) {
             return Optional.of(new GridLocation(newCol,newRow));
         } else {
             return Optional.empty();

@@ -5,7 +5,7 @@ package it.unicam.cs.pa2021.formulaUno;
  * @param <S> tipo di stato di un angolo
  * @param <L> tipo per la posizione di un angolo
  */
-public interface Corner<S,L extends Location> {
+public interface Corner<S,L> {
 
     /**
      * Restituisce il campo da gioco in cui si trova l'angolo.

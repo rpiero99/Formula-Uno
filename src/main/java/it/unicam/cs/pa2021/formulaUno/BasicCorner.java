@@ -5,7 +5,7 @@ package it.unicam.cs.pa2021.formulaUno;
  * @param <S> tipo di stato di un angolo
  * @param <L> tipo per la posizione di un angolo
  */
-public class BasicCorner<S,L extends Location> implements Corner{
+public class BasicCorner<S,L> implements Corner{
 
     private final GameField<S,L> field;
     private S status;

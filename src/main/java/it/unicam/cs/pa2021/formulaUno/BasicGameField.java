@@ -32,6 +32,11 @@ public class BasicGameField implements GameField<CornerStatus, GridLocation> {
         return this.cornerGrid[location.getColumn()][location.getRow()];
     }
 
+    @Override
+    public Set<GridLocation> getNextPossibleMoves(Car<CornerStatus, GridLocation> car) {
+        return car.getCurrentLocation().nextPossibleLocations(car);
+    }
+
     /**
      * Restituisce l'insieme degli angoli vicini alla posizione data.
      * @param location posizione nel campo da gioco.

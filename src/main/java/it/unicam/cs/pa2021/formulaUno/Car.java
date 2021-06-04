@@ -5,7 +5,7 @@ package it.unicam.cs.pa2021.formulaUno;
  * @param <S> tipo di stato di un angolo
  * @param <L> tipo per la posizione di un angolo
  */
-public interface Car<S, L extends Location> {
+public interface Car<S, L> {
 
     /**
      * Restituisce il giocatore proprietario del veicolo.
@@ -24,7 +24,6 @@ public interface Car<S, L extends Location> {
      * @return la posizione attuale del veicolo.
      */
     L getCurrentLocation();
-
 
     /**
      * Restituisce la precendente posizione occupata dal veicolo, utile per calcolare la prossima posizione.
