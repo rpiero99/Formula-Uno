@@ -10,6 +10,10 @@ public class GridLocationTest extends TestCase {
         GridLocation firstLoc = new GridLocation(4,11);
         Car<CornerStatus,GridLocation> car= new SimpleCar(null,new BasicGameField(40,40),firstLoc);
         car.moveToNewLocation(new GridLocation(5,9));
+        Set<GridLocation> nextLocations = car.getCurrentLocation().nextPossibleLocations(car);
+        for (GridLocation a: nextLocations) {
+            System.out.println(a.getColumn() + " " + a.getRow());
+        }
     }
 
     public void testGetAdjacentLocations() {

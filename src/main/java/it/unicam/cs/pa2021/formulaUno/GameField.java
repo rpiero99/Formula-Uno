@@ -10,6 +10,18 @@ import java.util.Set;
 public interface GameField<S,L> {
 
     /**
+     * Restituisce la larghezza del GameField.
+     * @return la larghezza del GameField.
+     */
+    int getWidth();
+
+    /**
+     * Restituisce l'altezza del GameField.
+     * @return l'altezza del GameField.
+     */
+    int getHeight();
+
+    /**
      * Restituisce un angolo ad una certa locazione.
      * @param location posizione nel campo da gioco.
      * @return l'angolo alla posizione data.
@@ -28,6 +40,6 @@ public interface GameField<S,L> {
      * @param moves le mosse dei giocatori.
      * @return il nuovo campo con l'applicazione delle mosse.
      */
-    GameField<S, L> nextStage(Set<Move<S,L>> moves);
+    GameField<S,L> nextStage(Set<Move<S,L>> moves);
 
 }

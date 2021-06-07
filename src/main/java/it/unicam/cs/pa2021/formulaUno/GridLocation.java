@@ -1,5 +1,6 @@
 package it.unicam.cs.pa2021.formulaUno;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,6 +33,9 @@ public class GridLocation{
      * @return restituisce l'insieme delle posizioni che potrà avere il veicolo.
      */
     public Set<GridLocation> nextPossibleLocations(Car car) {
+        if (!this.equals(car.getCurrentLocation()))
+            throw new IllegalArgumentException("ERRORE!: la posizione che ha chiamato questo metodo non è la stessa posizione del veicolo");
+
         return null;
     }
 
@@ -138,4 +142,16 @@ public class GridLocation{
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GridLocation that = (GridLocation) o;
+        return column == that.column && row == that.row;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(column, row);
+    }
 }

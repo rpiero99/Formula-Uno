@@ -28,6 +28,16 @@ public class BasicGameField implements GameField<CornerStatus, GridLocation> {
     }
 
     @Override
+    public int getWidth() {
+        return this.width;
+    }
+
+    @Override
+    public int getHeight() {
+        return this.height;
+    }
+
+    @Override
     public Corner<CornerStatus,GridLocation> getCornerAt(GridLocation location) {
         return this.cornerGrid[location.getColumn()][location.getRow()];
     }
