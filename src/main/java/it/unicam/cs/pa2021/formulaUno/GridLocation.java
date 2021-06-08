@@ -1,5 +1,6 @@
 package it.unicam.cs.pa2021.formulaUno;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -9,7 +10,7 @@ import java.util.stream.Stream;
 /**
  * Classe che descrive una griglia come tipo di locazione per gli angoli di un Game Field.
  */
-public class GridLocation{
+public class GridLocation implements Location<CornerStatus>{
 
     private final int column;
     private final int row;
@@ -27,16 +28,24 @@ public class GridLocation{
         return row;
     }
 
-    /**
-     * Dato un veicolo, restituisce l'insieme delle posizioni che potrà avere il veicolo.
-     * @param car il veicolo di cui dobbiamo calcolare l'insieme delle posizioni successive.
-     * @return restituisce l'insieme delle posizioni che potrà avere il veicolo.
-     */
-    public Set<GridLocation> nextPossibleLocations(Car car) {
+    @Override
+    public Set<GridLocation> nextPossibleLocations(Car <CornerStatus, ? extends Location> car) {
         if (!this.equals(car.getCurrentLocation()))
             throw new IllegalArgumentException("ERRORE!: la posizione che ha chiamato questo metodo non è la stessa posizione del veicolo");
+        GridLocation currentLocation = (GridLocation) car.getCurrentLocation();
+        GridLocation previousLocation = (GridLocation) car.getPreviousLocation();
+        GridLocation nextLocation = calculateNextLocation (currentLocation, previousLocation,car.getField().getWidth(), car.getField().getHeight());
+        Set<GridLocation> nextPossibleLocations = new HashSet<>();
+        nextPossibleLocations.add(nextLocation);
+        nextPossibleLocations.addAll(getAdjacentLocations(car.getField().getWidth(), car.getField().getHeight()));
+        return nextPossibleLocations;
+    }
 
-        return null;
+    private GridLocation calculateNextLocation(GridLocation currentLocation, GridLocation previousLocation, int width, int row) {
+        GridLocation nextLocation = null;
+        int diffColumn=currentLocation.getColumn()-previousLocation.getColumn();
+        int diffRow=currentLocation.getRow()-previousLocation.getRow();
+        return nextLocation;
     }
 
     /**
@@ -140,7 +149,6 @@ public class GridLocation{
             return Optional.empty();
         }
     }
-
 
     @Override
     public boolean equals(Object o) {

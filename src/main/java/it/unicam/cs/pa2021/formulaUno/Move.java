@@ -9,5 +9,4 @@ import java.util.Set;
  */
 public interface Move<S,L> {
 
-
 }

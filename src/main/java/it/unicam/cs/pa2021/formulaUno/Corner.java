@@ -1,11 +1,11 @@
 package it.unicam.cs.pa2021.formulaUno;
 
 /**
- * Interfaccia che definisce un generico angolo di un quadretto.
+ * Interfaccia che definisce un generico angolo di un GameField.
  * @param <S> tipo di stato di un angolo
  * @param <L> tipo per la posizione di un angolo
  */
-public interface Corner<S,L> {
+public interface Corner<S,L extends Location> {
 
     /**
      * Restituisce il campo da gioco in cui si trova l'angolo.

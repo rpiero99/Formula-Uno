@@ -7,7 +7,7 @@ import java.util.Set;
  * @param <S> tipo di stato di un angolo
  * @param <L> tipo per la posizione di un angolo
  */
-public interface Player<S,L> {
+public interface Player<S,L extends Location> {
 
     /**
      * Restituisce il nome del giocatore.
