@@ -34,18 +34,19 @@ public class GridLocation implements Location<CornerStatus>{
             throw new IllegalArgumentException("ERRORE!: la posizione che ha chiamato questo metodo non è la stessa posizione del veicolo");
         GridLocation currentLocation = (GridLocation) car.getCurrentLocation();
         GridLocation previousLocation = (GridLocation) car.getPreviousLocation();
-        GridLocation nextLocation = calculateNextLocation (currentLocation, previousLocation,car.getField().getWidth(), car.getField().getHeight());
+        GridLocation nextPossibleLocation = calculateNextPossibleLocation(currentLocation, previousLocation);
         Set<GridLocation> nextPossibleLocations = new HashSet<>();
-        nextPossibleLocations.add(nextLocation);
-        nextPossibleLocations.addAll(getAdjacentLocations(car.getField().getWidth(), car.getField().getHeight()));
+        nextPossibleLocations.addAll(nextPossibleLocation.getAdjacentLocations(car.getField().getWidth(), car.getField().getHeight()));
+        if ((0<= nextPossibleLocation.getColumn())&&(nextPossibleLocation.getColumn()<=car.getField().getWidth())&&(0<= nextPossibleLocation.getRow())&&(nextPossibleLocation.getRow()<=car.getField().getHeight()))
+            nextPossibleLocations.add(nextPossibleLocation);
         return nextPossibleLocations;
     }
 
-    private GridLocation calculateNextLocation(GridLocation currentLocation, GridLocation previousLocation, int width, int row) {
-        GridLocation nextLocation = null;
-        int diffColumn=currentLocation.getColumn()-previousLocation.getColumn();
-        int diffRow=currentLocation.getRow()-previousLocation.getRow();
-        return nextLocation;
+    private GridLocation calculateNextPossibleLocation(GridLocation currentLocation, GridLocation previousLocation) {
+        int newCol=2*currentLocation.getColumn()-previousLocation.getColumn();
+        int newRow=2*currentLocation.getRow()-previousLocation.getRow();
+
+        return new GridLocation(newCol,newRow);
     }
 
     /**
@@ -133,16 +134,17 @@ public class GridLocation implements Location<CornerStatus>{
     private Optional<GridLocation> aboveLeft(int width, int height) { return adjacent(width,height,-1,+1);}
 
     /**
-     *
+     * Trova una locazione adiacente a questa, se c'&egrave;.
      * @param width larghezza del GameField.
      * @param height altezza del GameField.
      * @param diffColumn differenza tra la colonna della locazione con quella della locazione richiesta.
      * @param diffRow differenza tra la riga della locazione con quella della locazione richiesta.
-     * @return la locazione richiesta, se c'&egrave;
+     * @return la locazione richiesta, se c'&egrave;.
      */
     private Optional<GridLocation> adjacent(int width, int height, int diffColumn, int diffRow) {
         int newCol = column +diffColumn;
         int newRow = row +diffRow;
+
         if ((0<= newCol)&&(newCol<=width)&&(0<=newRow)&&(newRow<=height)) {
             return Optional.of(new GridLocation(newCol,newRow));
         } else {
