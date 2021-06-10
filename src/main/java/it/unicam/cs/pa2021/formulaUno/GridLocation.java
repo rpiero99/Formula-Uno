@@ -35,8 +35,7 @@ public class GridLocation implements Location<CornerStatus>{
         GridLocation currentLocation = (GridLocation) car.getCurrentLocation();
         GridLocation previousLocation = (GridLocation) car.getPreviousLocation();
         GridLocation nextPossibleLocation = calculateNextPossibleLocation(currentLocation, previousLocation);
-        Set<GridLocation> nextPossibleLocations = new HashSet<>();
-        nextPossibleLocations.addAll(nextPossibleLocation.getAdjacentLocations(car.getField().getWidth(), car.getField().getHeight()));
+        Set<GridLocation> nextPossibleLocations = new HashSet<>(nextPossibleLocation.getAdjacentLocations(car.getField().getWidth(), car.getField().getHeight()));
         if ((0<= nextPossibleLocation.getColumn())&&(nextPossibleLocation.getColumn()<=car.getField().getWidth())&&(0<= nextPossibleLocation.getRow())&&(nextPossibleLocation.getRow()<=car.getField().getHeight()))
             nextPossibleLocations.add(nextPossibleLocation);
         return nextPossibleLocations;
