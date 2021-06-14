@@ -21,13 +21,16 @@ public interface Car<S, L extends Location> {
 
     /**
      * Restituisce la posizione attuale in cui si trova il veicolo.
+     * Se non è registrata nessuna posizione, verr&agrave; lanciata un IllegalArgumentException.
      * @return la posizione attuale del veicolo.
      */
     L getCurrentLocation();
 
     /**
      * Restituisce la precendente posizione occupata dal veicolo, utile per calcolare la prossima posizione.
-     * @return la precendente posizione occupata dal veicolo.
+     * @return la precendente posizione occupata dal veicolo. Se il veicolo ha registrata solo una posizione, vuol dire
+     * che si trova nella posizione di partenza, per cui verr&agrave; restituita quella. Se non è registrata nessuna posizione,
+     * verr&agrave; lanciata un IllegalArgumentException.
      */
     L getPreviousLocation();
 

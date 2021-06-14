@@ -47,14 +47,6 @@ public class BasicGameField implements GameField<CornerStatus, GridLocation> {
         return car.getCurrentLocation().nextPossibleLocations(car);
     }
 
-    /**
-     * Restituisce l'insieme degli angoli vicini alla posizione data.
-     * @param location posizione nel campo da gioco.
-     * @return l'insieme degli angoli vicini alla posizione data.
-     */
-    private Set<Corner<CornerStatus,GridLocation>> getAdjacentCorners(GridLocation location) {
-        return this.getCorners(location.getAdjacentLocations(width,height));
-    }
 
     private Set<Corner<CornerStatus, GridLocation>> getCorners(Set<GridLocation> adjacentLocations) {
         return adjacentLocations.stream()

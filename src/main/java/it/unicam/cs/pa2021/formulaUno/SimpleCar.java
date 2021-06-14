@@ -38,12 +38,18 @@ public class SimpleCar implements Car<CornerStatus,GridLocation>{
 
     @Override
     public GridLocation getCurrentLocation() {
+        if(this.locations.isEmpty())
+            throw new IllegalArgumentException("Nessuna posizione registrata per il veicolo.");
         return this.locations.lastElement();
     }
 
     @Override
     public GridLocation getPreviousLocation() {
-        return this.locations.elementAt(locations.size()-1);
+        if(this.locations.isEmpty())
+            throw new IllegalArgumentException("Nessuna posizione registrata per il veicolo.");
+        if(this.locations.size()==1)
+            return getCurrentLocation();
+        return this.locations.elementAt(locations.size()-2);
     }
 
     @Override

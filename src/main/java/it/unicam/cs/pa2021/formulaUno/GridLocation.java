@@ -29,7 +29,7 @@ public class GridLocation implements Location<CornerStatus>{
     }
 
     @Override
-    public Set<GridLocation> nextPossibleLocations(Car <CornerStatus, ? extends Location> car) {
+    public Set<GridLocation> nextPossibleLocations(Car <CornerStatus, ? extends Location<CornerStatus>> car) {
         if (!this.equals(car.getCurrentLocation()))
             throw new IllegalArgumentException("ERRORE!: la posizione che ha chiamato questo metodo non è la stessa posizione del veicolo");
         GridLocation currentLocation = (GridLocation) car.getCurrentLocation();
@@ -54,7 +54,7 @@ public class GridLocation implements Location<CornerStatus>{
      * @param height altezza del GameField.
      * @return l'insieme delle locazioni adiacenti a questa locazione.
      */
-    public Set<GridLocation> getAdjacentLocations(int width, int height) {
+    private Set<GridLocation> getAdjacentLocations(int width, int height) {
         return Stream.of(this.aboveLeft(width, height),
                 this.above(width,height),
                 this.aboveRight(width,height),

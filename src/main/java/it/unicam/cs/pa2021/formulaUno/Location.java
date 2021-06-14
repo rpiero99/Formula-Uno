@@ -9,5 +9,5 @@ public interface Location<S> {
      * @param car il veicolo di cui dobbiamo calcolare l'insieme delle posizioni successive.
      * @return restituisce l'insieme delle posizioni che potrà avere il veicolo.
      */
-    public Set<? extends Location> nextPossibleLocations(Car<S, ? extends Location> car);
+    Set<? extends Location<S>> nextPossibleLocations(Car<S,? extends Location<S>> car);
 }
