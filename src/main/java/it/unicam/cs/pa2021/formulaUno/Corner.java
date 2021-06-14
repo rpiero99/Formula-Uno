@@ -24,4 +24,10 @@ public interface Corner<S,L extends Location> {
      * @return la posizione dell'angolo nel campo da gioco.
      */
     L getLocation();
+
+    /**
+     * Cambia lo stato dell'angolo.
+     * @param status stato che sostituisce l'attuale.
+     */
+    void changeStatus(S status);
 }

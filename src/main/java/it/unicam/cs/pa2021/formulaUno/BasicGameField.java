@@ -1,5 +1,7 @@
 package it.unicam.cs.pa2021.formulaUno;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -8,22 +10,26 @@ import java.util.stream.Collectors;
  */
 public class BasicGameField implements GameField<CornerStatus, GridLocation> {
 
-    private final Corner<CornerStatus, GridLocation> [][] cornerGrid;
+    private final Corner<CornerStatus, GridLocation>[][] cornerGrid;
     private final int width;
     private final int height;
+    private final Set<Player<CornerStatus, GridLocation>> players;
 
     /**
      * Crea un campo con le dimensioni date, in cui tutti gli angoli sono in uno stato di OUT_OF_RACE.
      * @param width larghezza del campo.
      * @param height altezza del campo.
+     * @param players i giocatori partecipanti al gioco.
      */
-    public BasicGameField(int width, int height) {
+    public BasicGameField(int width, int height, Player<CornerStatus, GridLocation> ... players) {
         this.width = width;
         this.height = height;
+        this.players = new HashSet<>();
+        this.players.addAll(Arrays.asList(players));
         this.cornerGrid= new BasicCorner[height][width];
         for(int column=0; column<width;column++){
             for(int row=0; row<height; row++)
-                this.cornerGrid[column][row] = new BasicCorner<>(this, CornerStatus.OUT_OF_RACE,new GridLocation(column,row));
+                this.cornerGrid[column][row] = new BasicCorner<>(this, CornerStatus.OUT_OF_RACE, new GridLocation(column, row));
         }
     }
 
@@ -40,6 +46,11 @@ public class BasicGameField implements GameField<CornerStatus, GridLocation> {
     @Override
     public Corner<CornerStatus,GridLocation> getCornerAt(GridLocation location) {
         return this.cornerGrid[location.getColumn()][location.getRow()];
+    }
+
+    @Override
+    public Set<Player<CornerStatus, GridLocation>> getPlayers() {
+        return this.players;
     }
 
     @Override

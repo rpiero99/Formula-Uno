@@ -28,6 +28,8 @@ public interface GameField<S,L extends Location> {
      */
     Corner<S,L> getCornerAt(L location);
 
+    Set<Player<S,L>> getPlayers();
+
     /**
      * Restituisce l'insieme di posizioni in cui il veicolo potr&agrave; spostarsi.
      * @param car il veicolo di cui si vuole conoscere le prossime posizioni.
