@@ -13,7 +13,7 @@ public class BasicGameFieldTest {
         boolean[][] track = buildTrack(height, width);
         BasicGameField field = new BasicGameField(width, height, track);
         assertEquals(CornerStatus.IN_RACE, field.getCornerAt(new GridLocation(3, 2)).getStatus());
-        
+        assertEquals(CornerStatus.IN_RACE, field.getCornerAt(new GridLocation(4, 5)).getStatus());
     }
 
     private boolean[][] buildTrack(int height, int width) {
