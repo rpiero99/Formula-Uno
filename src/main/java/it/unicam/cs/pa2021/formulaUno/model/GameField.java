@@ -21,7 +21,7 @@ public interface GameField<L extends Location> {
     int getHeight();
 
     /**
-     * Restituisce un angolo ad una certa locazione.
+     * Restituisce un angolo ad una certa locazione, restituendo un'eccezione se la locazione passata non &egrave; compresa nel game field.
      * @param location posizione nel campo da gioco.
      * @return l'angolo alla posizione data.
      */

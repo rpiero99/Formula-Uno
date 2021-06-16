@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 /**
  * Classe che descrive una griglia come tipo di locazione per gli angoli di un Game Field.
  */
-public class GridLocation implements Location{
+public final class GridLocation implements Location{
 
     private final int column;
     private final int row;

@@ -42,6 +42,8 @@ public class BasicGameField implements GameField<GridLocation> {
 
     @Override
     public Corner<GridLocation> getCornerAt(GridLocation location) {
+        if (!isValid(location))
+            throw new ArrayIndexOutOfBoundsException("La posizione passata non è compresa in questo game field");
         return this.cornerGrid[location.getRow()][location.getColumn()];
     }
 
@@ -55,7 +57,25 @@ public class BasicGameField implements GameField<GridLocation> {
         return car.getCurrentLocation().nextPossibleLocations(car);
     }
 
+    /**
+     * Verifica se la locazione data &egrave; valida per il game field.
+     *
+     * @param loc locazione da verificare.
+     * @return true se la locazione &grave; valida per il game field, false altrimenti.
+     */
+    private boolean isValid(GridLocation loc) {
+        return isValid(loc.getRow(),loc.getColumn());
+    }
 
+    /**
+     * Verifica se le righe colonne date sono valide per il game field.
+     *
+     * @param
+     * @return true se la locazione &grave; valida per il game field, false altrimenti.
+     */
+    private boolean isValid(int row, int column) {
+        return (0<=column)&&(column<width)&&(0<=row)&&(row<height);
+    }
    /* private Set<Corner<CornerStatus, GridLocation>> getCorners(Set<GridLocation> adjacentLocations) {
         return adjacentLocations.stream()
                 .map(this::getCornerAt)
