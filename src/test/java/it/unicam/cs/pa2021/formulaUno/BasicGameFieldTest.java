@@ -1,5 +1,8 @@
 package it.unicam.cs.pa2021.formulaUno;
 
+import it.unicam.cs.pa2021.formulaUno.model.BasicGameField;
+import it.unicam.cs.pa2021.formulaUno.model.CornerStatus;
+import it.unicam.cs.pa2021.formulaUno.model.GridLocation;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

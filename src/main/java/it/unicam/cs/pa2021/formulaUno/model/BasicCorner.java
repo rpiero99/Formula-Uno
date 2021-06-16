@@ -1,4 +1,4 @@
-package it.unicam.cs.pa2021.formulaUno;
+package it.unicam.cs.pa2021.formulaUno.model;
 
 /**
  * Classe che implementa l'interfaccia Corner, in maniera di default.

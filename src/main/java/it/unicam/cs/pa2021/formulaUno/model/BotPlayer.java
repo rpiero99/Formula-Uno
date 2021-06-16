@@ -1,4 +1,4 @@
-package it.unicam.cs.pa2021.formulaUno;
+package it.unicam.cs.pa2021.formulaUno.model;
 
 import java.util.Objects;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package it.unicam.cs.pa2021.formulaUno;
+package it.unicam.cs.pa2021.formulaUno.model;
 
 /**
  * Enumerazione che descrive i diversi stati in cui pu&ograve; trovarsi un generico angolo.

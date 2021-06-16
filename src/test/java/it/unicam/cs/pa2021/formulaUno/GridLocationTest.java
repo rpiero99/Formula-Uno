@@ -1,5 +1,9 @@
 package it.unicam.cs.pa2021.formulaUno;
 
+import it.unicam.cs.pa2021.formulaUno.model.BasicGameField;
+import it.unicam.cs.pa2021.formulaUno.model.Car;
+import it.unicam.cs.pa2021.formulaUno.model.GridLocation;
+import it.unicam.cs.pa2021.formulaUno.model.SimpleCar;
 import junit.framework.TestCase;
 
 import java.util.Set;

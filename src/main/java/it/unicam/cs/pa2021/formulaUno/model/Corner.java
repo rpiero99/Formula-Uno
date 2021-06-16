@@ -1,4 +1,4 @@
-package it.unicam.cs.pa2021.formulaUno;
+package it.unicam.cs.pa2021.formulaUno.model;
 
 /**
  * Interfaccia che definisce un generico angolo di un GameField.
