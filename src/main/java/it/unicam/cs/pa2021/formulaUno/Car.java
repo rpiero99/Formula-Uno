@@ -2,22 +2,21 @@ package it.unicam.cs.pa2021.formulaUno;
 
 /**
  * Interfaccia che definisce un veicolo in un qualsiasi GameField.
- * @param <S> tipo di stato di un angolo
  * @param <L> tipo per la posizione di un angolo
  */
-public interface Car<S, L extends Location> {
+public interface Car<L extends Location> {
 
     /**
      * Restituisce il giocatore proprietario del veicolo.
      * @return il giocatore proprietario del veicolo.
      */
-    Player<S,L> getPlayer();
+    Player<L> getPlayer();
 
     /**
      * Restituisce il campo da gioco in cui si trova il veicolo.
      * @return il campo da gioco in cui si trova il veicolo.
      */
-    GameField<S,L> getField();
+    GameField<L> getField();
 
     /**
      * Restituisce la posizione attuale in cui si trova il veicolo.

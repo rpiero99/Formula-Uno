@@ -2,28 +2,27 @@ package it.unicam.cs.pa2021.formulaUno;
 
 /**
  * Classe che implementa l'interfaccia Corner, in maniera di default.
- * @param <S> tipo di stato di un angolo
  * @param <L> tipo per la posizione di un angolo
  */
-public class BasicCorner<S,L extends Location<S>> implements Corner<S,L>{
+public class BasicCorner<L extends Location> implements Corner<L>{
 
-    private final GameField<S,L> field;
-    private S status;
+    private final GameField<L> field;
+    private CornerStatus status;
     private final L location;
 
-    public BasicCorner(GameField<S, L> field, S status, L location) {
+    public BasicCorner(GameField<L> field, CornerStatus status, L location) {
         this.field = field;
         this.status = status;
         this.location = location;
     }
 
     @Override
-    public GameField<S,L> getField() {
+    public GameField<L> getField() {
         return this.field;
     }
 
     @Override
-    public S getStatus() {
+    public CornerStatus getStatus() {
         return this.status;
     }
 
@@ -33,7 +32,7 @@ public class BasicCorner<S,L extends Location<S>> implements Corner<S,L>{
     }
 
     @Override
-    public void changeStatus(S status) {
+    public void changeStatus(CornerStatus status) {
         this.status= status;
     }
 }

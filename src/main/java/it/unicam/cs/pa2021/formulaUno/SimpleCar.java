@@ -5,10 +5,10 @@ import java.util.Stack;
 /**
  * Classe che implementa l'interfaccia Car e descrive un basico veicolo in un Game Field.
  */
-public class SimpleCar implements Car<CornerStatus,GridLocation>{
+public class SimpleCar implements Car<GridLocation>{
 
-    private final Player<CornerStatus,GridLocation> player;
-    private final GameField<CornerStatus,GridLocation> field;
+    private final Player<GridLocation> player;
+    private final GameField<GridLocation> field;
     private final Stack<GridLocation> locations;
     private boolean isInRace;
 
@@ -18,7 +18,7 @@ public class SimpleCar implements Car<CornerStatus,GridLocation>{
      * @param field campo in cui è collocato il veicolo.
      * @param startingLocation posizione di partenza del veicolo.
      */
-    public SimpleCar(Player<CornerStatus,GridLocation> player, GameField<CornerStatus,GridLocation> field, GridLocation startingLocation) {
+    public SimpleCar(Player<GridLocation> player, GameField<GridLocation> field, GridLocation startingLocation) {
         this.player = player;
         this.field = field;
         this.locations = new Stack<>();
@@ -27,12 +27,12 @@ public class SimpleCar implements Car<CornerStatus,GridLocation>{
     }
 
     @Override
-    public Player<CornerStatus, GridLocation> getPlayer() {
+    public Player<GridLocation> getPlayer() {
         return player;
     }
 
     @Override
-    public GameField<CornerStatus, GridLocation> getField() {
+    public GameField<GridLocation> getField() {
         return field;
     }
 

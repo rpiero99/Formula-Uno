@@ -2,7 +2,7 @@ package it.unicam.cs.pa2021.formulaUno;
 
 import java.util.Set;
 
-public class SimplePlayer <S> implements Player<S, GridLocation> {
+public class SimplePlayer implements Player<GridLocation> {
 
     @Override
     public String getName() {
@@ -10,7 +10,7 @@ public class SimplePlayer <S> implements Player<S, GridLocation> {
     }
 
     @Override
-    public GameField<S, GridLocation> getField() {
+    public GameField< GridLocation> getField() {
         return null;
     }
 

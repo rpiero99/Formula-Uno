@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 /**
  * Classe che descrive una griglia come tipo di locazione per gli angoli di un Game Field.
  */
-public class GridLocation implements Location<CornerStatus>{
+public class GridLocation implements Location{
 
     private final int column;
     private final int row;
@@ -29,14 +29,14 @@ public class GridLocation implements Location<CornerStatus>{
     }
 
     @Override
-    public Set<GridLocation> nextPossibleLocations(Car <CornerStatus, ? extends Location<CornerStatus>> car) {
+    public Set<GridLocation> nextPossibleLocations(Car <? extends Location> car) {
         if (!this.equals(car.getCurrentLocation()))
             throw new IllegalArgumentException("ERRORE!: la posizione che ha chiamato questo metodo non è la stessa posizione del veicolo");
         GridLocation currentLocation = (GridLocation) car.getCurrentLocation();
         GridLocation previousLocation = (GridLocation) car.getPreviousLocation();
         GridLocation nextPossibleLocation = calculateNextPossibleLocation(currentLocation, previousLocation);
         Set<GridLocation> nextPossibleLocations = new HashSet<>(nextPossibleLocation.getAdjacentLocations(car.getField().getWidth(), car.getField().getHeight()));
-        if ((0<= nextPossibleLocation.getColumn())&&(nextPossibleLocation.getColumn()<=car.getField().getWidth())&&(0<= nextPossibleLocation.getRow())&&(nextPossibleLocation.getRow()<=car.getField().getHeight()))
+        if ((0<= nextPossibleLocation.getColumn())&&(nextPossibleLocation.getColumn()<car.getField().getWidth())&&(0<= nextPossibleLocation.getRow())&&(nextPossibleLocation.getRow()<car.getField().getHeight()))
             nextPossibleLocations.add(nextPossibleLocation);
         return nextPossibleLocations;
     }
@@ -144,7 +144,7 @@ public class GridLocation implements Location<CornerStatus>{
         int newCol = column +diffColumn;
         int newRow = row +diffRow;
 
-        if ((0<= newCol)&&(newCol<=width)&&(0<=newRow)&&(newRow<=height)) {
+        if ((0<= newCol)&&(newCol<width)&&(0<=newRow)&&(newRow<height)) {
             return Optional.of(new GridLocation(newCol,newRow));
         } else {
             return Optional.empty();
