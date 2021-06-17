@@ -21,9 +21,15 @@ public interface Player<L extends Location> {
     GameField<L> getField();
 
     /**
+     * Restituisce il veicolo associato al giocatore.
+     * @return il veicolo associato al giocatore.
+     */
+    Car<L> getCar();
+
+    /**
      * Sposta il veicolo in una delle posizioni passate come parametro.
      * @param possibleLocations posizioni candidate per essere attraversate dal veicolo.
-     * @return la posizione scelta per lo spostamento.
+     * @return il movimento che il giocatore vuole fare.
      */
-    L moveCarTo(Set<L> possibleLocations);
+    Move<L> moveCarTo(Set<L> possibleLocations);
 }

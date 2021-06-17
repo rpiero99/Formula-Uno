@@ -8,7 +8,6 @@ import java.util.Stack;
 public class SimpleCar implements Car<GridLocation>{
 
     private final Player<GridLocation> player;
-    private final GameField<GridLocation> field;
     private final Stack<GridLocation> locations;
     private boolean isInRace;
 
@@ -18,9 +17,8 @@ public class SimpleCar implements Car<GridLocation>{
      * @param field campo in cui è collocato il veicolo.
      * @param startingLocation posizione di partenza del veicolo.
      */
-    public SimpleCar(Player<GridLocation> player, GameField<GridLocation> field, GridLocation startingLocation) {
+    public SimpleCar(Player<GridLocation> player, GridLocation startingLocation) {
         this.player = player;
-        this.field = field;
         this.locations = new Stack<>();
         this.locations.add(startingLocation);
         this.isInRace = true;
@@ -33,7 +31,7 @@ public class SimpleCar implements Car<GridLocation>{
 
     @Override
     public GameField<GridLocation> getField() {
-        return field;
+        return getPlayer().getField();
     }
 
     @Override
@@ -45,9 +43,7 @@ public class SimpleCar implements Car<GridLocation>{
 
     @Override
     public GridLocation getPreviousLocation() {
-        if(this.locations.isEmpty())
-            throw new IllegalArgumentException("Nessuna posizione registrata per il veicolo.");
-        if(this.locations.size()==1)
+        if(this.locations.isEmpty() || this.locations.size()==1)
             return getCurrentLocation();
         return this.locations.elementAt(locations.size()-2);
     }

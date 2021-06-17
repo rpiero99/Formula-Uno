@@ -34,7 +34,12 @@ public class BotPlayer implements Player<GridLocation> {
     }
 
     @Override
-    public GridLocation moveCarTo(Set<GridLocation> possibleLocations) {
+    public Car<GridLocation> getCar() {
+        return null;
+    }
+
+    @Override
+    public Move<GridLocation> moveCarTo(Set<GridLocation> possibleLocations) {
         return null;
     }
 
