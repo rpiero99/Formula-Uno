@@ -2,6 +2,9 @@ package it.unicam.cs.pa2021.formulaUno.model;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Classe che implementa l'interfaccia GameField; descrive un classico campo formato da una griglia.
@@ -50,13 +53,31 @@ public class BasicGameField implements GameField<GridLocation> {
         return this.players;
     }
 
+    /**
+     * Restituisce tutti i veicoli appartenenti a questo game field.
+     * @return i veicoli appartenenti a questo game field.
+     */
+    private Set<Car<GridLocation>> getCars(){
+        return getPlayers().stream().map(Player::getCar).collect(Collectors.toSet());
+    }
+
     @Override
-    public Player<GridLocation> addPlayer(String name, GridLocation initialCarLocation) {
-        if(getCornerAt(initialCarLocation).getStatus()!= CornerStatus.IN_RACE)
+    public Player<GridLocation> addPlayer(Player<GridLocation> player) {
+        if(getCornerAt(player.getCar().getCurrentLocation()).getStatus()!= CornerStatus.IN_RACE)
             throw new IllegalArgumentException("La posizione passata non può essere considerata per la posizione di partenza di un veicolo");
-        Player<GridLocation> player = new BotPlayer(name, this, initialCarLocation);
+        if (!players.add(player))
+            throw new IllegalArgumentException("Il giocatore è già presente nel game field, non può essere aggiunto");
         players.add(player);
+        player.setField(this);
         return player;
+    }
+
+    @Override
+    public int countCar(Predicate<Car<GridLocation>> predicate) {
+        return (int) getCars()
+                .stream()
+                .filter(predicate)
+                .count();
     }
 
     @Override
@@ -96,8 +117,11 @@ public class BasicGameField implements GameField<GridLocation> {
 
     @Override
     public void nextStage() {
-        getMoves().forEach(Move::apply);
-        clearMoves();
+        if(!(countCar(Car::isInRace)==0)){
+            getMoves().forEach(Move::apply);
+            clearMoves();
+        }
+
     }
 
     private void buildRaceTrack(boolean[][] track){

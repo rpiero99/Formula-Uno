@@ -18,8 +18,8 @@ public class BasicGameFieldTest {
         GridLocation loc2 = new GridLocation(1,4);
 
         BasicGameField field = new BasicGameField(width, height, track);
-        Player<GridLocation> player1 = field.addPlayer("Piero", loc1);
-        Player<GridLocation> player2 = field.addPlayer("Cika", loc2);
+        Player<GridLocation> player1 = field.addPlayer(new BotPlayer("Piero", loc1));
+        Player<GridLocation> player2 = field.addPlayer(new BotPlayer("Cika", loc2));
         assertEquals(CornerStatus.IN_RACE, field.getCornerAt(new GridLocation(3, 2)).getStatus());
         assertEquals(CornerStatus.IN_RACE, field.getCornerAt(new GridLocation(4, 5)).getStatus());
 

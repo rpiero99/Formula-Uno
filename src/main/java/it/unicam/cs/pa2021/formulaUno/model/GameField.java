@@ -1,6 +1,7 @@
 package it.unicam.cs.pa2021.formulaUno.model;
 
 import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * Interfaccia che definisce un campo da gioco di formula uno.
@@ -35,11 +36,17 @@ public interface GameField<L extends Location> {
 
     /**
      * Aggiunge un giocatore al game field.
-     * @param name nome del giocatore da creare.
-     * @param initialCarLocation posizione iniziale del veicolo del nuovo giocatore.
+     * @param player il giocatore da aggiungere al game field.
      * @return il giocatore appena creato.
      */
-    Player<GridLocation> addPlayer(String name, L initialCarLocation);
+    Player<GridLocation> addPlayer(Player<L> player);
+
+    /**
+     * Conta tutti i veicoli che soddisfano un certo predicato.
+     * @param predicate predicato per scegliere i veicoli.
+     * @return il numero di veicoli che soddisfano il predicato.
+     */
+    int countCar(Predicate<Car<L>> predicate);
 
     /**
      * Restituisce l'insieme di posizioni in cui il veicolo potr&agrave; spostarsi.

@@ -11,24 +11,29 @@ public class BotPlayer implements Player<GridLocation> {
 
     //TODO: implementa un modo per scegliere automaticamente le posizioni in cui spostare il veicolo.
     private final String name;
-    private final GameField<GridLocation> field;
+    private GameField<GridLocation> field;
     private final Car<GridLocation> car;
 
 
     /**
      * Construttore per un giocatore bot.
      * @param name nome del giocatore.
-     * @param field campo nel quale opera il giocatore.
+     * @param initialPosition posizione di partenza del veicolo.
      */
-    public BotPlayer(String name, GameField<GridLocation> field, GridLocation initialPosition) {
+    public BotPlayer(String name, GridLocation initialPosition) {
         this.name = name;
-        this.field = field;
+        this.field = null;
         this.car = new SimpleCar(this, initialPosition);
     }
 
     @Override
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public void setField(GameField<GridLocation> field){
+        this.field = field;
     }
 
     @Override
