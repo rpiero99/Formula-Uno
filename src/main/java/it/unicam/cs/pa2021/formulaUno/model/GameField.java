@@ -41,10 +41,27 @@ public interface GameField<L extends Location> {
     Set<L> getNextPossibleMoves (Car<L> car);
 
     /**
-     * Applica al campo da gioco le mosse fatte dai giocatori.
-     * @param moves le mosse dei giocatori.
-     * @return il nuovo campo con l'applicazione delle mosse.
+     * Restituisce tutte le mosse fatte dai giocatori in questo turno.
+     * @return le mosse fatte dai giocatori.
      */
-    GameField<L> nextStage(Set<Move<L>> moves);
+    Set<Move<L>> getMoves();
+
+    /**
+     * Aggiunge un movimento di un veicolo fatto da un giocatore in questo turno.
+     * @param move movimento da registrare.
+     */
+    default void addMove(Move<L> move){
+        getMoves().add(move);
+    }
+
+    /**
+     * Cancella tutti i movimenti fatti in questo turno.
+     */
+    void clearMoves();
+
+    /**
+     * Applica al campo da gioco la mossa fatta dai giocatori.
+     */
+    void nextStage();
 
 }

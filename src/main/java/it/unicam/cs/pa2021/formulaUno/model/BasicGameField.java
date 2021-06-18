@@ -13,6 +13,7 @@ public class BasicGameField implements GameField<GridLocation> {
     private final int width;
     private final int height;
     private final Set<Player<GridLocation>> players;
+    private final Set<Move<GridLocation>> moves;
 
 
     /**
@@ -25,6 +26,7 @@ public class BasicGameField implements GameField<GridLocation> {
         this.width = width;
         this.height = height;
         this.players = new HashSet<>();
+        this.moves = new HashSet<>();
         this.players.addAll(Arrays.asList(players));
         this.cornerGrid= new Corner[height][width];
         this.buildRaceTrack(track);
@@ -42,7 +44,7 @@ public class BasicGameField implements GameField<GridLocation> {
 
     @Override
     public Corner<GridLocation> getCornerAt(GridLocation location) {
-        if (!isValid(location))
+        if (!isValidLocation(location))
             throw new ArrayIndexOutOfBoundsException("La posizione passata non è compresa in questo game field");
         return this.cornerGrid[location.getRow()][location.getColumn()];
     }
@@ -57,38 +59,40 @@ public class BasicGameField implements GameField<GridLocation> {
         return car.getCurrentLocation().nextPossibleLocations(car);
     }
 
+    @Override
+    public Set<Move<GridLocation>> getMoves() {
+        return this.moves;
+    }
+
+    @Override
+    public void clearMoves() {
+        this.moves.clear();
+    }
+
     /**
      * Verifica se la locazione data &egrave; valida per il game field.
      *
      * @param loc locazione da verificare.
      * @return true se la locazione &grave; valida per il game field, false altrimenti.
      */
-    private boolean isValid(GridLocation loc) {
-        return isValid(loc.getRow(),loc.getColumn());
+    private boolean isValidLocation(GridLocation loc) {
+        return isValidLocation(loc.getRow(),loc.getColumn());
     }
 
     /**
-     * Verifica se le righe colonne date sono valide per il game field.
-     *
-     * @param
+     * Verifica se le righe e le colonne date sono valide per il game field.
+     * @param row la riga da controllare.
+     * @param column la colonna da controllare.
      * @return true se la locazione &grave; valida per il game field, false altrimenti.
      */
-    private boolean isValid(int row, int column) {
+    private boolean isValidLocation(int row, int column) {
         return (0<=column)&&(column<width)&&(0<=row)&&(row<height);
     }
-   /* private Set<Corner<CornerStatus, GridLocation>> getCorners(Set<GridLocation> adjacentLocations) {
-        return adjacentLocations.stream()
-                .map(this::getCornerAt)
-                .collect(Collectors.toSet());
-    }*/
-/*
-    private Set<GridLocation> getAdjacentLocations(GridLocation location) {
-        return location.getAdjacentLocations(width,height);
-    }*/
 
     @Override
-    public GameField<GridLocation> nextStage(Set<Move<GridLocation>> moves) {
-        return null;
+    public void nextStage() {
+        getMoves().forEach(Move::apply);
+        clearMoves();
     }
 
     private void buildRaceTrack(boolean[][] track){

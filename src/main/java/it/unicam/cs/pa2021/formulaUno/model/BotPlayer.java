@@ -1,6 +1,7 @@
 package it.unicam.cs.pa2021.formulaUno.model;
 
 import java.util.Objects;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -11,15 +12,17 @@ public class BotPlayer implements Player<GridLocation> {
     //TODO: implementa un modo per scegliere automaticamente le posizioni in cui spostare il veicolo.
     private final String name;
     private final GameField<GridLocation> field;
+    private final Car<GridLocation> car;
 
     /**
      * Construttore per un giocatore bot.
      * @param name nome del giocatore.
      * @param field campo nel quale opera il giocatore.
      */
-    public BotPlayer(String name, GameField<GridLocation> field) {
+    public BotPlayer(String name, GameField<GridLocation> field, GridLocation initialPosition) {
         this.name = name;
         this.field = field;
+        this.car = new SimpleCar(this, initialPosition);
     }
 
 
@@ -35,12 +38,14 @@ public class BotPlayer implements Player<GridLocation> {
 
     @Override
     public Car<GridLocation> getCar() {
-        return null;
+        return this.car;
     }
 
     @Override
     public Move<GridLocation> moveCarTo(Set<GridLocation> possibleLocations) {
-        return null;
+        Random random = new Random();
+        GridLocation choice = possibleLocations.stream().skip(random.nextInt(possibleLocations.size())).findFirst().get();
+        return new SimpleMove<>(getCar(), choice);
     }
 
     @Override

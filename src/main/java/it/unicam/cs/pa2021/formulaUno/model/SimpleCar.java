@@ -14,7 +14,6 @@ public class SimpleCar implements Car<GridLocation>{
     /**
      * Creazione di un veicolo in una posizione di partenza
      * @param player giocatore che possiede il veicolo.
-     * @param field campo in cui è collocato il veicolo.
      * @param startingLocation posizione di partenza del veicolo.
      */
     public SimpleCar(Player<GridLocation> player, GridLocation startingLocation) {
