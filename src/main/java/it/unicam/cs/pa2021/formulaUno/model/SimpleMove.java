@@ -1,5 +1,7 @@
 package it.unicam.cs.pa2021.formulaUno.model;
 
+import java.util.Objects;
+
 /**
  * Classe che implementa un movimento generico di un veicolo.
  * @param <L> tipo per la posizione di un angolo.
@@ -22,5 +24,18 @@ public class SimpleMove <L extends Location> implements Move<L>{
     @Override
     public void apply() {
         car.moveToNewLocation(newLocation);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SimpleMove<?> that = (SimpleMove<?>) o;
+        return car.equals(that.car);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(car);
     }
 }

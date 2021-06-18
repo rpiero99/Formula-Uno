@@ -14,6 +14,7 @@ public class BotPlayer implements Player<GridLocation> {
     private final GameField<GridLocation> field;
     private final Car<GridLocation> car;
 
+
     /**
      * Construttore per un giocatore bot.
      * @param name nome del giocatore.
@@ -24,7 +25,6 @@ public class BotPlayer implements Player<GridLocation> {
         this.field = field;
         this.car = new SimpleCar(this, initialPosition);
     }
-
 
     @Override
     public String getName() {
@@ -53,11 +53,11 @@ public class BotPlayer implements Player<GridLocation> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BotPlayer botPlayer = (BotPlayer) o;
-        return name.equals(botPlayer.name);
+        return name.equals(botPlayer.name) && field.equals(botPlayer.field);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(name, field);
     }
 }

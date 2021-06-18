@@ -1,6 +1,5 @@
 package it.unicam.cs.pa2021.formulaUno.model;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,20 +14,17 @@ public class BasicGameField implements GameField<GridLocation> {
     private final Set<Player<GridLocation>> players;
     private final Set<Move<GridLocation>> moves;
 
-
     /**
      * Crea un campo con le dimensioni date, in cui tutti gli angoli sono in uno stato di OUT_OF_RACE.
      * @param width larghezza del campo.
      * @param height altezza del campo.
-     * @param players i giocatori partecipanti al gioco.
      */
-    public BasicGameField(int width, int height, boolean [][] track, Player<GridLocation> ... players) {
+    public BasicGameField(int width, int height, boolean [][] track) {
         this.width = width;
         this.height = height;
         this.players = new HashSet<>();
         this.moves = new HashSet<>();
-        this.players.addAll(Arrays.asList(players));
-        this.cornerGrid= new Corner[height][width];
+        this.cornerGrid = new Corner[height][width];
         this.buildRaceTrack(track);
     }
 
@@ -52,6 +48,15 @@ public class BasicGameField implements GameField<GridLocation> {
     @Override
     public Set<Player<GridLocation>> getPlayers() {
         return this.players;
+    }
+
+    @Override
+    public Player<GridLocation> addPlayer(String name, GridLocation initialCarLocation) {
+        if(getCornerAt(initialCarLocation).getStatus()!= CornerStatus.IN_RACE)
+            throw new IllegalArgumentException("La posizione passata non può essere considerata per la posizione di partenza di un veicolo");
+        Player<GridLocation> player = new BotPlayer(name, this, initialCarLocation);
+        players.add(player);
+        return player;
     }
 
     @Override

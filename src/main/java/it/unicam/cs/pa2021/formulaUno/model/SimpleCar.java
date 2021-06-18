@@ -1,5 +1,6 @@
 package it.unicam.cs.pa2021.formulaUno.model;
 
+import java.util.Objects;
 import java.util.Stack;
 
 /**
@@ -58,8 +59,26 @@ public class SimpleCar implements Car<GridLocation>{
     }
 
     @Override
+    public void changeStatus(boolean status) {
+        isInRace=status;
+    }
+
+    @Override
     public boolean isInRace() {
         return this.isInRace;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SimpleCar simpleCar = (SimpleCar) o;
+        return player.equals(simpleCar.player);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(player);
     }
 
 }

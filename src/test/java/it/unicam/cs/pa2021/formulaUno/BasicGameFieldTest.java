@@ -1,9 +1,9 @@
 package it.unicam.cs.pa2021.formulaUno;
 
-import it.unicam.cs.pa2021.formulaUno.model.BasicGameField;
-import it.unicam.cs.pa2021.formulaUno.model.CornerStatus;
-import it.unicam.cs.pa2021.formulaUno.model.GridLocation;
+import it.unicam.cs.pa2021.formulaUno.model.*;
 import org.junit.Test;
+
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -14,9 +14,21 @@ public class BasicGameFieldTest {
         int height= 10;
         int width=8;
         boolean[][] track = buildTrack(height, width);
+        GridLocation loc1 = new GridLocation(0,4);
+        GridLocation loc2 = new GridLocation(1,4);
+
         BasicGameField field = new BasicGameField(width, height, track);
+        Player<GridLocation> player1 = field.addPlayer("Piero", loc1);
+        Player<GridLocation> player2 = field.addPlayer("Cika", loc2);
         assertEquals(CornerStatus.IN_RACE, field.getCornerAt(new GridLocation(3, 2)).getStatus());
         assertEquals(CornerStatus.IN_RACE, field.getCornerAt(new GridLocation(4, 5)).getStatus());
+
+        Move<GridLocation> move1 = player1.moveCarTo(field.getNextPossibleMoves(player1.getCar()));
+        Move<GridLocation> move2 = player2.moveCarTo(field.getNextPossibleMoves(player2.getCar()));
+
+        field.addMove(move1);
+        field.addMove(move2);
+        field.nextStage();
     }
 
     private boolean[][] buildTrack(int height, int width) {

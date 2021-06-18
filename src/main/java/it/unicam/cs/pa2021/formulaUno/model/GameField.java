@@ -34,6 +34,14 @@ public interface GameField<L extends Location> {
     Set<Player<L>> getPlayers();
 
     /**
+     * Aggiunge un giocatore al game field.
+     * @param name nome del giocatore da creare.
+     * @param initialCarLocation posizione iniziale del veicolo del nuovo giocatore.
+     * @return il giocatore appena creato.
+     */
+    Player<GridLocation> addPlayer(String name, L initialCarLocation);
+
+    /**
      * Restituisce l'insieme di posizioni in cui il veicolo potr&agrave; spostarsi.
      * @param car il veicolo di cui si vuole conoscere le prossime posizioni.
      * @return l'insieme di posizioni in cui il veicolo potr&agrave; spostarsi.
@@ -51,6 +59,8 @@ public interface GameField<L extends Location> {
      * @param move movimento da registrare.
      */
     default void addMove(Move<L> move){
+        if(!getMoves().add(move))
+            throw new IllegalArgumentException("Il giocatore ha già fatto una mossa in questo turno");
         getMoves().add(move);
     }
 

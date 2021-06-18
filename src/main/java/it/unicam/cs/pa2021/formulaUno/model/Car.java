@@ -45,6 +45,12 @@ public interface Car<L extends Location> {
     void clearLocations();
 
     /**
+     * Cambia lo stato del veicolo: ad esempio se esso ha subito un incidente, isInRace sar&agrave; messo a false.
+     * @param status nuovo stato del veicolo.
+     */
+    void changeStatus(boolean status);
+
+    /**
      * Restituisce true se il veicolo &egrave; ancora in corsa, false se esso ha subito un incidente.
      * @return true se il veicolo &egrave; ancora in corsa, false se esso ha subito un incidente.
      */
