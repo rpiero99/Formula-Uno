@@ -8,30 +8,17 @@ import java.util.Stack;
  */
 public class SimpleCar implements Car<GridLocation>{
 
-    private final Player<GridLocation> player;
     private final Stack<GridLocation> locations;
     private boolean isInRace;
 
     /**
      * Creazione di un veicolo in una posizione di partenza
-     * @param player giocatore che possiede il veicolo.
      * @param startingLocation posizione di partenza del veicolo.
      */
-    public SimpleCar(Player<GridLocation> player, GridLocation startingLocation) {
-        this.player = player;
+    public SimpleCar(GridLocation startingLocation) {
         this.locations = new Stack<>();
         this.locations.add(startingLocation);
         this.isInRace = true;
-    }
-
-    @Override
-    public Player<GridLocation> getPlayer() {
-        return player;
-    }
-
-    @Override
-    public GameField<GridLocation> getField() {
-        return getPlayer().getField();
     }
 
     @Override
@@ -66,19 +53,6 @@ public class SimpleCar implements Car<GridLocation>{
     @Override
     public boolean isInRace() {
         return this.isInRace;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SimpleCar simpleCar = (SimpleCar) o;
-        return player.equals(simpleCar.player);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(player);
     }
 
 }

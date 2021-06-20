@@ -29,14 +29,14 @@ public final class GridLocation implements Location{
     }
 
     @Override
-    public Set<GridLocation> nextPossibleLocations(Car <? extends Location> car) {
+    public Set<GridLocation> nextPossibleLocations(Car <? extends Location> car, GameField<? extends Location> field) {
         if (!this.equals(car.getCurrentLocation()))
             throw new IllegalArgumentException("ERRORE!: la posizione che ha chiamato questo metodo non è la stessa posizione del veicolo");
         GridLocation currentLocation = (GridLocation) car.getCurrentLocation();
         GridLocation previousLocation = (GridLocation) car.getPreviousLocation();
         GridLocation nextPossibleLocation = calculateNextPossibleLocation(currentLocation, previousLocation);
-        Set<GridLocation> nextPossibleLocations = new HashSet<>(nextPossibleLocation.getAdjacentLocations(car.getField().getWidth(), car.getField().getHeight()));
-        if ((0<= nextPossibleLocation.getColumn())&&(nextPossibleLocation.getColumn()<car.getField().getWidth())&&(0<= nextPossibleLocation.getRow())&&(nextPossibleLocation.getRow()<car.getField().getHeight()))
+        Set<GridLocation> nextPossibleLocations = new HashSet<>(nextPossibleLocation.getAdjacentLocations(field.getWidth(), field.getHeight()));
+        if ((0<= nextPossibleLocation.getColumn())&&(nextPossibleLocation.getColumn()<field.getWidth())&&(0<= nextPossibleLocation.getRow())&&(nextPossibleLocation.getRow()<field.getHeight()))
             nextPossibleLocations.add(nextPossibleLocation);
         return nextPossibleLocations;
     }

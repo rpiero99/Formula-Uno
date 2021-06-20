@@ -7,18 +7,6 @@ package it.unicam.cs.pa2021.formulaUno.model;
 public interface Car<L extends Location> {
 
     /**
-     * Restituisce il giocatore proprietario del veicolo.
-     * @return il giocatore proprietario del veicolo.
-     */
-    Player<L> getPlayer();
-
-    /**
-     * Restituisce il campo da gioco in cui si trova il veicolo.
-     * @return il campo da gioco in cui si trova il veicolo.
-     */
-    GameField<L> getField();
-
-    /**
      * Restituisce la posizione attuale in cui si trova il veicolo.
      * Se non è registrata nessuna posizione, verr&agrave; lanciata un IllegalArgumentException.
      * @return la posizione attuale del veicolo.

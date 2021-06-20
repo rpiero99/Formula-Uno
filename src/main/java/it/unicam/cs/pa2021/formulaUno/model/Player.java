@@ -15,18 +15,6 @@ public interface Player<L extends Location> {
     String getName();
 
     /**
-     * Imposta il game field in cui gioca il giocatore.
-     * @param field il game field in cui gioca il giocatore.
-     */
-    void setField(GameField<L> field);
-
-    /**
-     * Restituisce il game field in cui gioca il giocatore.
-     * @return il game field in cui gioca il giocatore.
-     */
-    GameField<L> getField();
-
-    /**
      * Restituisce il veicolo associato al giocatore.
      * @return il veicolo associato al giocatore.
      */

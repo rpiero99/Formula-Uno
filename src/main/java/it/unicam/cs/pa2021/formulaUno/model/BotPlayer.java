@@ -11,7 +11,6 @@ public class BotPlayer implements Player<GridLocation> {
 
     //TODO: implementa un modo per scegliere automaticamente le posizioni in cui spostare il veicolo.
     private final String name;
-    private GameField<GridLocation> field;
     private final Car<GridLocation> car;
 
 
@@ -22,23 +21,12 @@ public class BotPlayer implements Player<GridLocation> {
      */
     public BotPlayer(String name, GridLocation initialPosition) {
         this.name = name;
-        this.field = null;
-        this.car = new SimpleCar(this, initialPosition);
+        this.car = new SimpleCar(initialPosition);
     }
 
     @Override
     public String getName() {
         return this.name;
-    }
-
-    @Override
-    public void setField(GameField<GridLocation> field){
-        this.field = field;
-    }
-
-    @Override
-    public GameField <GridLocation> getField() {
-        return this.field;
     }
 
     @Override
@@ -58,11 +46,11 @@ public class BotPlayer implements Player<GridLocation> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BotPlayer botPlayer = (BotPlayer) o;
-        return name.equals(botPlayer.name) && field.equals(botPlayer.field);
+        return name.equals(botPlayer.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, field);
+        return Objects.hash(name);
     }
 }

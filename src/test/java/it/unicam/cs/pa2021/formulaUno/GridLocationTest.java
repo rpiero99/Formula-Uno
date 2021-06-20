@@ -13,7 +13,7 @@ public class GridLocationTest extends TestCase {
         Player<GridLocation> player = field.addPlayer(new BotPlayer("Arfonso",firstLoc));
         Car<GridLocation> car= player.getCar();
         car.moveToNewLocation(new GridLocation(6,4));
-        Set<GridLocation> nextLocations = car.getCurrentLocation().nextPossibleLocations(car);
+        Set<GridLocation> nextLocations = car.getCurrentLocation().nextPossibleLocations(car, field);
         assertTrue(nextLocations.contains(new GridLocation(3,5)));
         assertTrue(nextLocations.contains(new GridLocation(3,6)));
         assertTrue(nextLocations.contains(new GridLocation(3,7)));

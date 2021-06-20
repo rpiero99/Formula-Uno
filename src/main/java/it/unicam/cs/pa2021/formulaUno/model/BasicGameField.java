@@ -68,7 +68,6 @@ public class BasicGameField implements GameField<GridLocation> {
         if (!players.add(player))
             throw new IllegalArgumentException("Il giocatore è già presente nel game field, non può essere aggiunto");
         players.add(player);
-        player.setField(this);
         return player;
     }
 
@@ -82,7 +81,7 @@ public class BasicGameField implements GameField<GridLocation> {
 
     @Override
     public Set<GridLocation> getNextPossibleMoves(Car<GridLocation> car) {
-        return car.getCurrentLocation().nextPossibleLocations(car);
+        return car.getCurrentLocation().nextPossibleLocations(car, this);
     }
 
     @Override
