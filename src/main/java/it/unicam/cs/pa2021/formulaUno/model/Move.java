@@ -9,7 +9,8 @@ package it.unicam.cs.pa2021.formulaUno.model;
 public interface Move<L extends Location> {
 
     /**
-     * Sposta un veicolo da una posizione ad un'altra
+     * Sposta un veicolo da una posizione ad un'altra, controllando se effettivamente esso sia ancora in corsa:
+     * in caso non lo sia, lancia un'eccezione
      */
     void apply();
 

@@ -12,8 +12,7 @@ public class BotPlayer implements Player<GridLocation> {
     //TODO: implementa un modo per scegliere automaticamente le posizioni in cui spostare il veicolo.
     private final String name;
     private final Car<GridLocation> car;
-
-
+    
     /**
      * Construttore per un giocatore bot.
      * @param name nome del giocatore.

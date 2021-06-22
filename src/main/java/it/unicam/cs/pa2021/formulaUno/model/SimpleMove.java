@@ -23,7 +23,10 @@ public class SimpleMove <L extends Location> implements Move<L>{
 
     @Override
     public void apply() {
-        car.moveToNewLocation(newLocation);
+        if(car.isInRace())
+            car.moveToNewLocation(newLocation);
+        else
+            throw new IllegalStateException("Il veicolo non è attualmente in corsa, aspetta la prossima gara");
     }
 
     @Override

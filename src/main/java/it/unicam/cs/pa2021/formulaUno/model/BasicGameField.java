@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Classe che implementa l'interfaccia GameField; descrive un classico campo formato da una griglia.
@@ -53,12 +52,14 @@ public class BasicGameField implements GameField<GridLocation> {
         return this.players;
     }
 
-    /**
-     * Restituisce tutti i veicoli appartenenti a questo game field.
-     * @return i veicoli appartenenti a questo game field.
-     */
-    private Set<Car<GridLocation>> getCars(){
+    @Override
+    public Set<Car<GridLocation>> getCars(){
         return getPlayers().stream().map(Player::getCar).collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<Car<GridLocation>> getCars(Predicate<Car<GridLocation>> predicate) {
+        return getCars().stream().filter(predicate).collect(Collectors.toSet());
     }
 
     @Override
@@ -116,11 +117,23 @@ public class BasicGameField implements GameField<GridLocation> {
 
     @Override
     public void nextStage() {
-        if(!(countCar(Car::isInRace)==0)){
+        if(countCar(Car::isInRace)!=0){
             getMoves().forEach(Move::apply);
             clearMoves();
+            checkCollision();
         }
 
+    }
+
+    /**
+     * Controlla se tutti veicoli che sono in corsa hanno fatto un incidente in questo turno.
+     */
+    private void checkCollision() {
+        for (Car<GridLocation> car: getCars(Car::isInRace)) {
+            GridLocation current = car.getCurrentLocation();
+            if(getCornerAt(current).getStatus()==CornerStatus.OUT_OF_RACE || getCars(Car::isInRace).stream().anyMatch(a ->a.getCurrentLocation().equals(current)))
+                car.changeStatus(false);
+        }
     }
 
     private void buildRaceTrack(boolean[][] track){
