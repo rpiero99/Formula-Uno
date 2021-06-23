@@ -20,8 +20,9 @@ public class BasicGameField implements GameField<GridLocation> {
      * Crea un campo con le dimensioni date, in cui tutti gli angoli sono in uno stato di OUT_OF_RACE.
      * @param width larghezza del campo.
      * @param height altezza del campo.
+     * @param track istruzioni per la configurazione del campo.
      */
-    public BasicGameField(int width, int height, boolean [][] track) {
+    public BasicGameField(int width, int height, int [][] track) {
         this.width = width;
         this.height = height;
         this.players = new HashSet<>();
@@ -74,10 +75,8 @@ public class BasicGameField implements GameField<GridLocation> {
 
     @Override
     public int countCar(Predicate<Car<GridLocation>> predicate) {
-        return (int) getCars()
-                .stream()
-                .filter(predicate)
-                .count();
+        return getCars(predicate)
+                .size();
     }
 
     @Override
@@ -117,7 +116,7 @@ public class BasicGameField implements GameField<GridLocation> {
 
     @Override
     public void nextStage() {
-        if(countCar(Car::isInRace)!=0){
+        if(countCar(Car::isInRace) >1){
             getMoves().forEach(Move::apply);
             clearMoves();
             checkCollision();
@@ -126,21 +125,30 @@ public class BasicGameField implements GameField<GridLocation> {
     }
 
     /**
-     * Controlla se tutti veicoli che sono in corsa hanno fatto un incidente in questo turno.
+     * Controlla se tutti veicoli che sono attualmente in corsa abbiano fatto un incidente in questo turno, ossia se sono usciti fuori dal cicuito,
+     * oppure hanno occupato lo stesso angolo in questo turno.
      */
     private void checkCollision() {
         for (Car<GridLocation> car: getCars(Car::isInRace)) {
             GridLocation current = car.getCurrentLocation();
-            if(getCornerAt(current).getStatus()==CornerStatus.OUT_OF_RACE || getCars(Car::isInRace).stream().anyMatch(a ->a.getCurrentLocation().equals(current)))
+            if(getCornerAt(current).getStatus()==CornerStatus.OUT_OF_RACE || getCars(Car::isInRace).stream().filter(a -> a.getCurrentLocation().equals(current)).count()>1)
                 car.changeStatus(false);
         }
     }
 
-    private void buildRaceTrack(boolean[][] track){
+    /**
+     * Costruisce il game field, in base alla matrice di int passata come parametro: se una cella &egrave; uguale a 1, far&agrave;
+     * parte del circuito di gara; se una cella &egrave; uguale a 2 sar&agrave; parte del traguardo; mentre se &egrave; uguale a 0,
+     * sar&agrave; fuori dal cirucito.
+     * @param track istruzioni per la configurazione del campo.
+     */
+    private void buildRaceTrack(int[][] track){
         for(int row=0; row<height; row++){
             for(int column=0; column<width; column++){
-                if(track[row][column])
+                if(track[row][column]==1)
                     this.cornerGrid[row][column] = new BasicCorner<>(this, CornerStatus.IN_RACE, new GridLocation(column, row));
+                else if(track[row][column]==2)
+                    this.cornerGrid[row][column] = new BasicCorner<>(this, CornerStatus.GOAL, new GridLocation(column, row));
                 else
                     this.cornerGrid[row][column] = new BasicCorner<>(this, CornerStatus.OUT_OF_RACE, new GridLocation(column, row));
             }

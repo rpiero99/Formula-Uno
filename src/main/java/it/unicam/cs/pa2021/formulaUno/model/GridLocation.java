@@ -41,6 +41,12 @@ public final class GridLocation implements Location{
         return nextPossibleLocations;
     }
 
+    /**
+     * Calcola la posizione successiva di un veicolo, in base alle due posizioni precedenti.
+     * @param currentLocation posizione corrente del veicolo.
+     * @param previousLocation posizione precedente a quella corrente del veicolo.
+     * @return la posizione successiva.
+     */
     private GridLocation calculateNextPossibleLocation(GridLocation currentLocation, GridLocation previousLocation) {
         int newCol=2*currentLocation.getColumn()-previousLocation.getColumn();
         int newRow=2*currentLocation.getRow()-previousLocation.getRow();
