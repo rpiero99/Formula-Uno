@@ -33,6 +33,23 @@ public class BasicGameFieldTest {
         field.addMove(move2);
         field.addMove(move3);
         field.nextStage();
+
+        if(player1.getCar().isInRace()){
+            move1 = player1.moveCarTo(field.getNextPossibleMoves(player1.getCar()));
+            field.addMove(move1);
+        }
+
+        if(player2.getCar().isInRace()){
+            move2 = player2.moveCarTo(field.getNextPossibleMoves(player2.getCar()));
+            field.addMove(move2);
+        }
+
+        if(player3.getCar().isInRace()){
+            move3 = player3.moveCarTo(field.getNextPossibleMoves(player3.getCar()));
+            field.addMove(move3);
+        }
+
+        field.nextStage();
     }
 
     private int[][] buildTrack(int height, int width) {

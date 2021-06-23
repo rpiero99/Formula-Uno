@@ -131,7 +131,7 @@ public class BasicGameField implements GameField<GridLocation> {
     private void checkCollision() {
         for (Car<GridLocation> car: getCars(Car::isInRace)) {
             GridLocation current = car.getCurrentLocation();
-            if(getCornerAt(current).getStatus()==CornerStatus.OUT_OF_RACE || getCars(Car::isInRace).stream().filter(a -> a.getCurrentLocation().equals(current)).count()>1)
+            if(getCornerAt(current).getStatus()==CornerStatus.OUT_OF_RACE || getCars().stream().filter(a -> a.getCurrentLocation().equals(current)).count()>1)
                 car.changeStatus(false);
         }
     }

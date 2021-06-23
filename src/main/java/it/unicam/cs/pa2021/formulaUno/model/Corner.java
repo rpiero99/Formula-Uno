@@ -24,9 +24,4 @@ public interface Corner<L extends Location> {
      */
     L getLocation();
 
-    /**
-     * Cambia lo stato dell'angolo.
-     * @param status stato che sostituisce l'attuale.
-     */
-    void changeStatus(CornerStatus status);
 }

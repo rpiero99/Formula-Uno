@@ -7,7 +7,7 @@ package it.unicam.cs.pa2021.formulaUno.model;
 public class BasicCorner<L extends Location> implements Corner<L>{
 
     private final GameField<L> field;
-    private CornerStatus status;
+    private final CornerStatus status;
     private final L location;
 
     public BasicCorner(GameField<L> field, CornerStatus status, L location) {
@@ -31,8 +31,4 @@ public class BasicCorner<L extends Location> implements Corner<L>{
         return this.location;
     }
 
-    @Override
-    public void changeStatus(CornerStatus status) {
-        this.status= status;
-    }
 }
