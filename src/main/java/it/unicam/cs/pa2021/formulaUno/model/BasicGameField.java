@@ -120,8 +120,21 @@ public class BasicGameField implements GameField<GridLocation> {
             getMoves().forEach(Move::apply);
             clearMoves();
             checkCollision();
+            checkWinner();
         }
 
+    }
+
+    /**
+     * Controlla se in questo turno un veicolo ha tagliato il traguardo. In quel caso, esso sar&agrave; considerato il vincitore.
+     * Il gioco viene cos&igrave; fermato.
+     */
+    private void checkWinner() {
+        //TODO: trova un modo per finire una partita.
+        for (Car<GridLocation> car: getCars(Car::isInRace)) {
+            if(getCornerAt(car.getCurrentLocation()).getStatus()==CornerStatus.GOAL)
+                car.changeStatus(false);
+        }
     }
 
     /**
