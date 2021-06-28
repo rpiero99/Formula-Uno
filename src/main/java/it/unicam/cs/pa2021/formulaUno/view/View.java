@@ -11,7 +11,7 @@ public interface View<L extends Location> {
 
     /**
      * Con questo metodo si ottiene una vista di un game field.
-     * @param field field da visualizzare.
+     * @param field game field da visualizzare.
      */
     void printGameField(GameField<L> field);
 }
