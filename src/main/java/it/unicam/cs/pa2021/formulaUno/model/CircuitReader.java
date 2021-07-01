@@ -20,4 +20,16 @@ public interface CircuitReader {
      * @return i nomi dei giocatori che partecipano alla corsa.
      */
     Set<String> namePlayers() throws IOException;
+
+    /**
+     * Restituisce la larghezza del circuito creato, in base alle info prese dal file.
+     * @return la larghezza del circuito creato.
+     */
+    int getTrackWidth();
+
+    /**
+     *  Restituisce l'altezza del circuito creato, in base alle info prese dal file.
+     * @return l'altezza del circuito creato.
+     */
+    int getTrackHeight();
 }

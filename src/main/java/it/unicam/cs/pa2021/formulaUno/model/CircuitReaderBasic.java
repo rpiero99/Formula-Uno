@@ -15,6 +15,8 @@ public class CircuitReaderBasic implements CircuitReader {
 
     private final Reader fileReader;
     private final Set<String> namePlayers;
+    private int width;
+    private int height;
 
     public CircuitReaderBasic(Reader fileReader) {
         this.fileReader = fileReader;
@@ -25,8 +27,8 @@ public class CircuitReaderBasic implements CircuitReader {
     public int[][] createCircuit() throws IOException {
         BufferedReader in = new BufferedReader(fileReader);
         String[] infos = in.readLine().split(";");
-        int width = Integer.parseInt(infos[0]);
-        int height = Integer.parseInt(infos[1]);
+        this.width = Integer.parseInt(infos[0]);
+        this.height = Integer.parseInt(infos[1]);
         namePlayers.addAll(Arrays.asList(infos).subList(2, infos.length));
         int[][] circuit = buildCircuit(in, width, height);
         in.close();
@@ -38,14 +40,29 @@ public class CircuitReaderBasic implements CircuitReader {
         return namePlayers;
     }
 
+    @Override
+    public int getTrackWidth() {
+        return this.width;
+    }
+
+    @Override
+    public int getTrackHeight() {
+        return this.height;
+    }
+
     private int[][] buildCircuit(BufferedReader in, int width, int height) throws IOException {
         int[][] circuit = new int[height][width];
 
         for(int r = 0; r< height; r++){
             in.readLine();
             for(int c = 0; c< width; c++){
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append((char)in.read());
+                char current = (char) in.read();
+                if(current =='x')
+                    circuit[r][c] = 0;
+                else if(current =='-')
+                    circuit[r][c] = 1;
+                else if(current == '*')
+                    circuit[r][c] = 2;
             }
         }
         return circuit;

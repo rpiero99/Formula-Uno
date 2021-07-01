@@ -14,6 +14,6 @@ public class CircuitReaderBasicTest {
         File file = new File("circuito.txt");
         FileReader fileReader = new FileReader(file);
         CircuitReaderBasic reader= new CircuitReaderBasic(fileReader);
-        reader.createCircuit();
+        int [][] circuit = reader.createCircuit();
     }
 }
