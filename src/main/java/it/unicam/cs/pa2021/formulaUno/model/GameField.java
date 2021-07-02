@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 /**
  * Interfaccia che definisce un campo da gioco di formula uno.
- * @param <L> tipo per la posizione di un angolo
+ * @param <L> tipo per la posizione di un angolo.
  */
 public interface GameField<L extends Location> {
 
@@ -89,7 +89,7 @@ public interface GameField<L extends Location> {
     void clearMoves();
 
     /**
-     * Applica al campo da gioco la mossa fatta dai giocatori.
+     * Applica al campo da gioco i movimenti fatti dai giocatori in questo turno.
      */
     void nextStage();
 
