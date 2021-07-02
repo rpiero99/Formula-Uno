@@ -15,6 +15,7 @@ public class BasicGameField implements GameField<GridLocation> {
     private final int height;
     private final Set<Player<GridLocation>> players;
     private final Set<Move<GridLocation>> moves;
+    private boolean state;
 
     /**
      * Crea un campo con le dimensioni date, in cui tutti gli angoli sono in uno stato di OUT_OF_RACE.
@@ -27,6 +28,7 @@ public class BasicGameField implements GameField<GridLocation> {
         this.height = height;
         this.players = new HashSet<>();
         this.moves = new HashSet<>();
+        this.state = true;
         this.cornerGrid = new Corner[height][width];
         this.buildRaceTrack(track);
     }
@@ -80,6 +82,16 @@ public class BasicGameField implements GameField<GridLocation> {
     }
 
     @Override
+    public boolean getState() {
+        return this.state;
+    }
+
+    @Override
+    public void changeState(boolean state) {
+        this.state = state;
+    }
+
+    @Override
     public Set<GridLocation> getNextPossibleMoves(Car<GridLocation> car) {
         return car.getCurrentLocation().nextPossibleLocations(car, this);
     }
@@ -116,13 +128,14 @@ public class BasicGameField implements GameField<GridLocation> {
 
     @Override
     public void nextStage() {
-        if(countCar(Car::isInRace) >1){
+        if(getState()){
             getMoves().forEach(Move::apply);
             clearMoves();
             checkCollision();
             checkWinner();
         }
-
+        else
+            throw new IllegalStateException("La gara è terminata, non si possono fare altre mosse");
     }
 
     /**
@@ -130,11 +143,21 @@ public class BasicGameField implements GameField<GridLocation> {
      * Il gioco viene cos&igrave; fermato.
      */
     private void checkWinner() {
-        //TODO: trova un modo per finire una partita.
         for (Car<GridLocation> car: getCars(Car::isInRace)) {
-            if(getCornerAt(car.getCurrentLocation()).getStatus()==CornerStatus.GOAL)
+            if(getCornerAt(car.getCurrentLocation()).getStatus()==CornerStatus.GOAL){
                 car.changeStatus(false);
+                getPlayers().stream().filter(p -> p.getCar().equals(car)).forEach(p -> p.setWinner(true));
+                this.changeState(false);
+            }
         }
+
+        if(getCars(Car::isInRace).size()==1){
+            getPlayers().stream().filter(p -> p.getCar().isInRace()).forEach(p -> p.setWinner(true));
+            this.changeState(false);
+        }
+
+        else if(getCars(Car::isInRace).size()==0)
+            this.changeState(false);
     }
 
     /**

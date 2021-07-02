@@ -21,6 +21,18 @@ public interface Player<L extends Location> {
     Car<L> getCar();
 
     /**
+     * Restituisce true se il giocatore ha vinto questa gara, false altrimenti.
+     * @return true se il giocatore ha vinto questa gara, false altrimenti.
+     */
+    boolean isWinner();
+
+    /**
+     * Imposta true se il giocatore ha vinto, false altrimenti.
+     * @param winner esito della gara.
+     */
+    void setWinner(boolean winner);
+
+    /**
      * Sposta il veicolo in una delle posizioni passate come parametro.
      * @param possibleLocations posizioni candidate per essere attraversate dal veicolo.
      * @return il movimento che il giocatore vuole fare.

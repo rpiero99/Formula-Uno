@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public class BotPlayer implements Player<GridLocation> {
 
-    //TODO: implementa un modo per scegliere automaticamente le posizioni in cui spostare il veicolo.
+    private boolean isWinner;
     private final String name;
     private final Car<GridLocation> car;
     
@@ -21,6 +21,7 @@ public class BotPlayer implements Player<GridLocation> {
     public BotPlayer(String name, GridLocation initialPosition) {
         this.name = name;
         this.car = new SimpleCar(initialPosition);
+        this.isWinner = false;
     }
 
     @Override
@@ -31,6 +32,16 @@ public class BotPlayer implements Player<GridLocation> {
     @Override
     public Car<GridLocation> getCar() {
         return this.car;
+    }
+
+    @Override
+    public boolean isWinner() {
+        return this.isWinner;
+    }
+
+    @Override
+    public void setWinner(boolean winner) {
+        this.isWinner = winner;
     }
 
     @Override

@@ -61,6 +61,18 @@ public interface GameField<L extends Location> {
     int countCar(Predicate<Car<L>> predicate);
 
     /**
+     * Restituisci lo stato attuale della gara: true se &egrave; ancora in corso, false altrimenti.
+     * @return true se la gara &egrave; ancora in corso, false altrimenti.
+     */
+    boolean getState();
+
+    /**
+     * Cambia lo stato della gara in corsa.
+     * @param state nuovo stato della gara.
+     */
+    void changeState(boolean state);
+
+    /**
      * Restituisce l'insieme di posizioni in cui il veicolo potr&agrave; spostarsi.
      * @param car il veicolo di cui si vuole conoscere le prossime posizioni.
      * @return l'insieme di posizioni in cui il veicolo potr&agrave; spostarsi.
