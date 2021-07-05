@@ -7,18 +7,18 @@ import java.util.Set;
 /**
  * Classe che implementa un giocatore bot.
  */
-public class BotPlayer implements Player<GridLocation> {
+public class BotPlayer<L extends Location> implements Player<L> {
 
     private boolean isWinner;
     private final String name;
-    private final Car<GridLocation> car;
+    private final Car<L> car;
     
     /**
      * Construttore per un giocatore bot.
      * @param name nome del giocatore.
      * @param initialPosition posizione di partenza del veicolo.
      */
-    public BotPlayer(String name, GridLocation initialPosition) {
+    public BotPlayer(String name, L initialPosition) {
         this.name = name;
         this.car = new SimpleCar(initialPosition);
         this.isWinner = false;
@@ -30,7 +30,7 @@ public class BotPlayer implements Player<GridLocation> {
     }
 
     @Override
-    public Car<GridLocation> getCar() {
+    public Car<L> getCar() {
         return this.car;
     }
 
@@ -45,9 +45,9 @@ public class BotPlayer implements Player<GridLocation> {
     }
 
     @Override
-    public Move<GridLocation> moveCarTo(Set<GridLocation> possibleLocations) {
+    public Move<L> moveCarTo(Set<L> possibleLocations) {
         Random random = new Random();
-        GridLocation choice = possibleLocations.stream().skip(random.nextInt(possibleLocations.size())).findFirst().get();
+        L choice = possibleLocations.stream().skip(random.nextInt(possibleLocations.size())).findFirst().get();
         return new SimpleMove<>(getCar(), choice);
     }
 
