@@ -9,13 +9,13 @@ import it.unicam.cs.pa2021.formulaUno.view.View;
  * Semplice controller per questa applicazione, che coordina le basiche azioni di sistema.
  * @param <L> tipo per la posizione di un angolo.
  */
-public class SimpleController<L extends Location> implements Controller<L>{
+public class SimpleController<T extends GameField<L>, L extends Location> implements Controller<T, L>{
 //TODO meglio
 
-    private final View<L> view;
-    private final GameField<L> gameField;
+    private final View<T, L> view;
+    private final T gameField;
 
-    public SimpleController(View<L> view, GameField<L> gameField) {
+    public SimpleController(View<T,L> view, T gameField) {
         this.view = view;
         this.gameField = gameField;
     }
@@ -26,7 +26,7 @@ public class SimpleController<L extends Location> implements Controller<L>{
     }
 
     @Override
-    public GameField<L> getGameField() {
+    public T getGameField() {
         return this.gameField;
     }
 
