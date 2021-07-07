@@ -4,6 +4,8 @@ import it.unicam.cs.pa2021.formulaUno.model.BasicGameField;
 import it.unicam.cs.pa2021.formulaUno.model.CornerStatus;
 import it.unicam.cs.pa2021.formulaUno.model.GridLocation;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 /**
@@ -12,17 +14,18 @@ import java.util.Stack;
 public class BasicGameFieldPrinter implements GameFieldPrinter<BasicGameField, GridLocation> {
 
     @Override
-    public Stack<Character> print(BasicGameField gameField) {
-        Stack<Character> characterStack = new Stack<>();
+    public Deque<Character> print(BasicGameField gameField) {
+        Deque<Character> characterStack = new ArrayDeque<>();
         for(int row=0; row<gameField.getHeight(); row++){
             for(int col=0; col< gameField.getWidth(); col++){
                 if(gameField.getCornerAt(new GridLocation(col, row)).getStatus()== CornerStatus.OUT_OF_RACE)
-                    characterStack.push('X');
+                    characterStack.add('X');
                 else if(gameField.getCornerAt(new GridLocation(col, row)).getStatus()== CornerStatus.IN_RACE)
-                    characterStack.push('-');
+                    characterStack.add('-');
                 else if(gameField.getCornerAt(new GridLocation(col, row)).getStatus()==CornerStatus.GOAL)
-                    characterStack.push('*');
+                    characterStack.add('*');
             }
+            characterStack.add('\n');
         }
         return characterStack;
     }

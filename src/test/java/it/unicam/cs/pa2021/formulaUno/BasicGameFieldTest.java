@@ -19,7 +19,7 @@ public class BasicGameFieldTest {
 
     @Test
     public void buildField() throws IOException {
-        File file = new File("circuito.txt");
+        File file = new File("circuitoLineare.txt");
         FileReader fileReader = new FileReader(file);
         CircuitReaderBasic reader= new CircuitReaderBasic(fileReader);
         GameFieldCreator<GridLocation> fieldCreator = new BasicGameFieldCreator();
@@ -27,9 +27,9 @@ public class BasicGameFieldTest {
         int[][] track = reader.createCircuit();
         int height= reader.getTrackHeight();
         int width= reader.getTrackWidth();
-        GridLocation loc1 = new GridLocation(1,6);
-        GridLocation loc2 = new GridLocation(2,6);
-        GridLocation loc3 = new GridLocation(3, 6);
+        GridLocation loc1 = new GridLocation(1,1);
+        GridLocation loc2 = new GridLocation(2,1);
+        GridLocation loc3 = new GridLocation(3, 1);
 
         BasicGameField field = (BasicGameField) fieldCreator.createGameField(width, height, track);
         Player<GridLocation> player1 = field.addPlayer(playerCreator.createPlayer("Piero", loc1));

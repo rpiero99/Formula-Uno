@@ -6,7 +6,7 @@ import it.unicam.cs.pa2021.formulaUno.model.printer.GameFieldPrinter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Stack;
+import java.util.Deque;
 
 /**
  * Classe che rappresenta la vista di un game field direttamente su console.
@@ -54,8 +54,9 @@ public class ConsoleView <T extends GameField<L>, L extends Location> implements
     }
 
     private void printMatrix(T field) {
-        Stack<Character> characterStack = printer.print(field);
-
-
+        Deque<Character> characterStack = printer.print(field);
+        for (char a: characterStack) {
+            System.out.print(a);
+        }
     }
 }
