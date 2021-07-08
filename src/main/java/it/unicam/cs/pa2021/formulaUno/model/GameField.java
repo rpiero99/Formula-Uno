@@ -39,20 +39,20 @@ public interface GameField<L extends Location> {
      * Restituisce tutti i veicoli appartenenti a questo game field.
      * @return i veicoli appartenenti a questo game field.
      */
-    Set<Car<GridLocation>> getCars();
+    Set<Car<L>> getCars();
 
     /**
      * Restituisce tutti i veicoli che soddisfano un dato predicato.
      * @param predicate predicato per scegliere i veicoli.
      * @return i veicoli che soddisfano il predicato.
      */
-    Set<Car<GridLocation>> getCars(Predicate<Car<L>> predicate);
+    Set<Car<L>> getCars(Predicate<Car<L>> predicate);
     /**
      * Aggiunge un giocatore al game field.
      * @param player il giocatore da aggiungere al game field.
      * @return il giocatore appena creato.
      */
-    Player<GridLocation> addPlayer(Player<L> player);
+    Player<L> addPlayer(Player<L> player);
 
     /**
      * Conta tutti i veicoli che soddisfano un certo predicato.

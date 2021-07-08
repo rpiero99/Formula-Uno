@@ -3,6 +3,7 @@ package it.unicam.cs.pa2021.formulaUno.controller;
 import it.unicam.cs.pa2021.formulaUno.model.GameField;
 import it.unicam.cs.pa2021.formulaUno.model.Location;
 import it.unicam.cs.pa2021.formulaUno.model.Move;
+import it.unicam.cs.pa2021.formulaUno.model.Player;
 import it.unicam.cs.pa2021.formulaUno.view.View;
 
 /**
@@ -28,6 +29,11 @@ public class SimpleController<T extends GameField<L>, L extends Location> implem
     @Override
     public T getGameField() {
         return this.gameField;
+    }
+
+    @Override
+    public Player<L> addPlayer(Player<L> player) {
+        return this.gameField.addPlayer(player);
     }
 
     @Override

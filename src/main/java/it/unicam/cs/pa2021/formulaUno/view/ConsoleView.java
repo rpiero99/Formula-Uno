@@ -17,8 +17,9 @@ public class ConsoleView <T extends GameField<L>, L extends Location> implements
     private final GameFieldPrinter<T, L> printer;
 
     /**
-     * Metodo costruttore al quale passo un oggetto BufferedReader per inserire comandi da tastiera.
+     * Metodo costruttore al quale passo un printer che sceglie il modo di visualizzare il game field.
      * @param myInput oggetto BufferedReader.
+     * @param printer printer che sceglie il modo di visualizzazione del game field.
      */
     public ConsoleView(BufferedReader myInput, GameFieldPrinter<T, L> printer){
         this.myInput=myInput;
@@ -27,11 +28,9 @@ public class ConsoleView <T extends GameField<L>, L extends Location> implements
 
     @Override
     public void printGameField(T field) {
-        starting();
-        while (field.getState()){
-           printMatrix(field);
-        }
-        goodByes(field);
+        printMatrix(field);
+        if(field.getState())
+            goodByes(field);
     }
 
     @Override
@@ -41,12 +40,6 @@ public class ConsoleView <T extends GameField<L>, L extends Location> implements
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void starting(){
-        System.out.println("***************************");
-        System.out.println("**      FORMULA UNO      **");
-        System.out.println("***************************");
     }
 
     private void goodByes(T field) {

@@ -4,6 +4,7 @@ package it.unicam.cs.pa2021.formulaUno.controller;
 import it.unicam.cs.pa2021.formulaUno.model.GameField;
 import it.unicam.cs.pa2021.formulaUno.model.Location;
 import it.unicam.cs.pa2021.formulaUno.model.Move;
+import it.unicam.cs.pa2021.formulaUno.model.Player;
 
 /**
  * Controller del pattern MVC, che coordina le azioni da eseguire ad un game field, attraverso la definizione di una view.
@@ -21,6 +22,13 @@ public interface Controller<T extends GameField<L>, L extends Location> {
      * @return il game field associato.
      */
     T getGameField();
+
+    /**
+     * Aggiunge un giocatore al game field associato.
+     * @param player giocatore da aggiungere
+     * @return il giocatore appena aggiunto.
+     */
+    Player<L> addPlayer(Player<L> player);
 
     /**
      * Aggiunge un movimento di un veicolo fatto da un giocatore in questo turno.
