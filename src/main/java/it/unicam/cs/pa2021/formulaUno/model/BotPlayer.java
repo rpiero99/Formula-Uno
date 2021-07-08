@@ -20,7 +20,7 @@ public class BotPlayer<L extends Location> implements Player<L> {
      */
     public BotPlayer(String name, L initialPosition) {
         this.name = name;
-        this.car = new SimpleCar(initialPosition);
+        this.car = new SimpleCar<>(initialPosition);
         this.isWinner = false;
     }
 

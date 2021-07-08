@@ -1,5 +1,6 @@
 package it.unicam.cs.pa2021.formulaUno.model;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -104,5 +105,11 @@ public interface GameField<L extends Location> {
      * Applica al campo da gioco i movimenti fatti dai giocatori in questo turno.
      */
     void nextStage();
+
+    /**
+     * Restituisce il vincitore di questa gara.
+     * @return il vincitore di questa gara.
+     */
+    Optional<Player<L>> getWinner();
 
 }

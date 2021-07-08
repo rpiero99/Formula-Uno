@@ -31,7 +31,7 @@ public class ConsoleView <T extends GameField<L>, L extends Location> implements
         while (field.getState()){
            printMatrix(field);
         }
-        goodByes();
+        goodByes(field);
     }
 
     @Override
@@ -49,7 +49,11 @@ public class ConsoleView <T extends GameField<L>, L extends Location> implements
         System.out.println("***************************");
     }
 
-    private void goodByes() {
+    private void goodByes(T field) {
+        if(field.getWinner().isPresent())
+            System.out.println("Il vincitore di questa partita :"+field.getWinner().get().getName());
+        else
+            System.out.println("Purtoppo sono finiti tutti fuori strada, dai sarà per la prossima");
         System.out.println("Fine della partita, riavvia l'applicazione per giocare di nuovo");
     }
 

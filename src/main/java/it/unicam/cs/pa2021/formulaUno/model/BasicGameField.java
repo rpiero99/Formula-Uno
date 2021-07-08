@@ -1,6 +1,7 @@
 package it.unicam.cs.pa2021.formulaUno.model;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -136,6 +137,11 @@ public class BasicGameField implements GameField<GridLocation> {
         }
         else
             throw new IllegalStateException("La gara è terminata, non si possono fare altre mosse");
+    }
+
+    @Override
+    public Optional<Player<GridLocation>> getWinner() {
+        return getPlayers().stream().filter(Player::isWinner).findFirst();
     }
 
     /**
