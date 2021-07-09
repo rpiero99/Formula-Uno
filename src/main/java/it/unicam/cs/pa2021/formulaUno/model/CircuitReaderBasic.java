@@ -3,9 +3,7 @@ package it.unicam.cs.pa2021.formulaUno.model;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Classe che ha la responsabilit&agrave; di costruire una matrice per permettere ad un game field di
@@ -14,13 +12,13 @@ import java.util.Set;
 public class CircuitReaderBasic implements CircuitReader {
 
     private final Reader fileReader;
-    private final Set<String> namePlayers;
+    private final Deque<String> namePlayers;
     private int width;
     private int height;
 
     public CircuitReaderBasic(Reader fileReader) {
         this.fileReader = fileReader;
-        this.namePlayers = new HashSet<>();
+        this.namePlayers = new ArrayDeque<>();
     }
 
     @Override
@@ -36,7 +34,7 @@ public class CircuitReaderBasic implements CircuitReader {
     }
 
     @Override
-    public Set<String> namePlayers() {
+    public Deque<String> namePlayers() {
         return namePlayers;
     }
 
@@ -63,6 +61,8 @@ public class CircuitReaderBasic implements CircuitReader {
                     circuit[r][c] = 1;
                 else if(current == '*')
                     circuit[r][c] = 2;
+                else if(current == '+')
+                    circuit[r][c] = 3;
             }
         }
         return circuit;

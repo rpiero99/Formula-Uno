@@ -1,8 +1,7 @@
 package it.unicam.cs.pa2021.formulaUno.model;
 
 import java.io.IOException;
-import java.io.Reader;
-import java.util.Set;
+import java.util.Deque;
 
 /**
  * Interfaccia che serve per creare un circuito da un qualsiasi file fornito in lettura.
@@ -19,7 +18,7 @@ public interface CircuitReader {
      * Restituisce i giocatori che partecipano alla corsa.
      * @return i nomi dei giocatori che partecipano alla corsa.
      */
-    Set<String> namePlayers() throws IOException;
+    Deque<String> namePlayers() throws IOException;
 
     /**
      * Restituisce la larghezza del circuito creato, in base alle info prese dal file.

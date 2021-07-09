@@ -11,7 +11,7 @@ import it.unicam.cs.pa2021.formulaUno.model.Player;
 public class BotPlayerCreator<L extends Location> implements PlayerCreator<L>{
 
     @Override
-    public Player<L> createPlayer(String name, L initialPosition) {
-        return new BotPlayer<>(name, initialPosition);
+    public Player<L> createPlayer(String name) {
+        return new BotPlayer<>(name);
     }
 }

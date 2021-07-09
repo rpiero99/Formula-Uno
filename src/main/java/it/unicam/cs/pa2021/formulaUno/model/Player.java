@@ -15,6 +15,13 @@ public interface Player<L extends Location> {
     String getName();
 
     /**
+     * Crea e restituisce il nuovo veicolo associato al giocatore.
+     * @param initialLocation posizione iniziale del veicolo.
+     * @return il nuovo veicolo creato.
+     */
+    Car<L> createNewCar(L initialLocation);
+
+    /**
      * Restituisce il veicolo associato al giocatore.
      * @return il veicolo associato al giocatore.
      */

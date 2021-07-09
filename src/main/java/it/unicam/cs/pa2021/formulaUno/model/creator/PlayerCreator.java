@@ -12,8 +12,7 @@ public interface PlayerCreator<L extends Location> {
     /**
      * Crea e restituisce un giocatore grazie ai parametri passati.
      * @param name nome per il nuovo giocatore.
-     * @param initialPosition posizione iniziale per il veicolo del giocatore.
      * @return il giocatore creato.
      */
-    Player<L> createPlayer(String name, L initialPosition);
+    Player<L> createPlayer(String name);
 }

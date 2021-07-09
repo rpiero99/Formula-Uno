@@ -11,22 +11,26 @@ public class BotPlayer<L extends Location> implements Player<L> {
 
     private boolean isWinner;
     private final String name;
-    private final Car<L> car;
+    private Car<L> car;
     
     /**
      * Construttore per un giocatore bot.
      * @param name nome del giocatore.
-     * @param initialPosition posizione di partenza del veicolo.
      */
-    public BotPlayer(String name, L initialPosition) {
+    public BotPlayer(String name) {
         this.name = name;
-        this.car = new SimpleCar<>(initialPosition);
         this.isWinner = false;
     }
 
     @Override
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public Car<L> createNewCar(L initialLocation) {
+        this.car = new SimpleCar<>(initialLocation);
+        return getCar();
     }
 
     @Override

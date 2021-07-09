@@ -1,8 +1,6 @@
 package it.unicam.cs.pa2021.formulaUno.model;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -67,13 +65,37 @@ public class BasicGameField implements GameField<GridLocation> {
     }
 
     @Override
+    public boolean isThereACar(GridLocation location) {
+        return getCars(Car::isInRace).stream().anyMatch(c -> c.getCurrentLocation().equals(location));
+    }
+
+    @Override
     public Player<GridLocation> addPlayer(Player<GridLocation> player) {
-        if(getCornerAt(player.getCar().getCurrentLocation()).getStatus()!= CornerStatus.IN_RACE)
-            throw new IllegalArgumentException("La posizione passata non può essere considerata per la posizione di partenza di un veicolo");
-        if (!players.add(player))
-            throw new IllegalArgumentException("Il giocatore è già presente nel game field, non può essere aggiunto");
+        for(Player<GridLocation> player1 : getPlayers()){
+            if(player1.equals(player))
+                throw new IllegalArgumentException("Il giocatore è già presente nel game field, non può essere aggiunto");
+        }
+        Optional<Corner<GridLocation>> startingCorner = getCorners(c -> c.getStatus()==CornerStatus.STARTING && !isThereACar(c.getLocation())).stream().findFirst();
+        if(startingCorner.isPresent())
+            player.createNewCar(startingCorner.get().getLocation());
+        else
+            throw new NullPointerException("Attualmente non abbiamo posti per nuovi giocatori, riprova più tardi");
         players.add(player);
         return player;
+    }
+
+    @Override
+    public Set<Corner<GridLocation>> getCorners() {
+        Set<Corner<GridLocation>> corners = new HashSet<>();
+        for(int r = 0; r < height; r++){
+            corners.addAll(Arrays.asList(cornerGrid[r]).subList(0, width));
+        }
+        return corners;
+    }
+
+    @Override
+    public Set<Corner<GridLocation>> getCorners(Predicate<Corner<GridLocation>> predicate) {
+        return getCorners().stream().filter(predicate).collect(Collectors.toSet());
     }
 
     @Override
@@ -191,6 +213,8 @@ public class BasicGameField implements GameField<GridLocation> {
                     this.cornerGrid[row][column] = new BasicCorner<>(this, CornerStatus.IN_RACE, new GridLocation(column, row));
                 else if(track[row][column]==2)
                     this.cornerGrid[row][column] = new BasicCorner<>(this, CornerStatus.GOAL, new GridLocation(column, row));
+                else if(track[row][column]==3)
+                    this.cornerGrid[row][column] = new BasicCorner<>(this, CornerStatus.STARTING, new GridLocation(column, row));
                 else
                     this.cornerGrid[row][column] = new BasicCorner<>(this, CornerStatus.OUT_OF_RACE, new GridLocation(column, row));
             }

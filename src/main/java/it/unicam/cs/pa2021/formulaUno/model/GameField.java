@@ -47,12 +47,33 @@ public interface GameField<L extends Location> {
      * @return i veicoli che soddisfano il predicato.
      */
     Set<Car<L>> getCars(Predicate<Car<L>> predicate);
+
     /**
-     * Aggiunge un giocatore al game field.
+     * Restituisce true se in quella posizione ci &egrave; attualmente allocato un veicolo, false altrimenti.
+     * @param location posizione da controllare.
+     * @return esito del controllo.
+     */
+    boolean isThereACar(L location);
+
+    /**
+     * Aggiunge un giocatore al game field, lanciando un eccezione se esso &egrave; gi&agrave; presente nel game field.
      * @param player il giocatore da aggiungere al game field.
      * @return il giocatore appena creato.
      */
     Player<L> addPlayer(Player<L> player);
+
+    /**
+     * Restituisce tutti gli angoli del game field, sottoforma di set.
+     * @return gli angoli del game field.
+     */
+    Set<Corner<L>> getCorners();
+
+    /**
+     * Restituisce un insieme di angoli che soddisfano un certo predicato.
+     * @param predicate predicato per scegliere gli angoli.
+     * @return l'insieme di angoli che soddisfano il predicato.
+     */
+    Set<Corner<L>> getCorners(Predicate<Corner<L>> predicate);
 
     /**
      * Conta tutti i veicoli che soddisfano un certo predicato.

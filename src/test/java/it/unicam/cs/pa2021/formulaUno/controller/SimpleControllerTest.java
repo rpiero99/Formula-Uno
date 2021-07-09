@@ -12,11 +12,17 @@ import it.unicam.cs.pa2021.formulaUno.model.printer.GameFieldPrinter;
 import it.unicam.cs.pa2021.formulaUno.view.ConsoleView;
 import it.unicam.cs.pa2021.formulaUno.view.View;
 import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.io.*;
 
 public class SimpleControllerTest {
+
+    Controller<BasicGameField, GridLocation> controller;
+    BasicGameField field;
+    PlayerCreator<GridLocation> playerCreator;
+    GameFieldCreator<GridLocation> fieldCreator;
 
     @BeforeEach
     public void init() throws IOException {
@@ -24,8 +30,8 @@ public class SimpleControllerTest {
         FileReader fileReader = new FileReader(file);
         CircuitReaderBasic reader= new CircuitReaderBasic(fileReader);
 
-        GameFieldCreator<GridLocation> fieldCreator = new BasicGameFieldCreator();
-        PlayerCreator<GridLocation> playerCreator = new BotPlayerCreator<>();
+        fieldCreator = new BasicGameFieldCreator();
+        playerCreator = new BotPlayerCreator<>();
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
         GameFieldPrinter<BasicGameField, GridLocation> printer = new BasicGameFieldPrinter();
@@ -33,10 +39,10 @@ public class SimpleControllerTest {
         int height= reader.getTrackHeight();
         int width= reader.getTrackWidth();
 
-        BasicGameField field = (BasicGameField) fieldCreator.createGameField(width, height, track);
+        field = (BasicGameField) fieldCreator.createGameField(width, height, track);
         View<BasicGameField, GridLocation> view = new ConsoleView<>(in, printer);
 
-        Controller<BasicGameField, GridLocation> controller = new SimpleController<>(view, field);
+        controller = new SimpleController<>(view, field);
     }
 
     @Test
@@ -45,6 +51,7 @@ public class SimpleControllerTest {
 
     @Test
     public void getGameField() {
+        assertNotNull(controller.getGameField());
     }
 
     @Test
@@ -57,5 +64,6 @@ public class SimpleControllerTest {
 
     @Test
     public void viewGameField() {
+        controller.viewGameField();
     }
 }
