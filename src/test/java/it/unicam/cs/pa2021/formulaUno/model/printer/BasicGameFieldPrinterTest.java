@@ -22,12 +22,13 @@ public class BasicGameFieldPrinterTest {
         File file = new File("circuitoLineare.txt");
         FileReader fileReader = new FileReader(file);
         CircuitReaderBasic reader= new CircuitReaderBasic(fileReader);
-        GameFieldCreator<GridLocation> fieldCreator = new BasicGameFieldCreator();
+        PlayerCreator<GridLocation> playerCreator = new BotPlayerCreator<>();
+        GameFieldCreator<GridLocation> fieldCreator = new BasicGameFieldCreator(playerCreator);
         int[][] track = reader.createCircuit();
         int height= reader.getTrackHeight();
         int width= reader.getTrackWidth();
 
-        BasicGameField field = (BasicGameField) fieldCreator.createGameField(width, height, track);
+        BasicGameField field = (BasicGameField) fieldCreator.createGameField(width, height, track, reader.namePlayers());
 
         GameFieldPrinter<BasicGameField, GridLocation> printer = new BasicGameFieldPrinter();
         Deque<Character> characterDeque = printer.print(field);

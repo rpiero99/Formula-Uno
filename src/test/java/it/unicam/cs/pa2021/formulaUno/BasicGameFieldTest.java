@@ -9,13 +9,9 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Deque;
-import java.util.Set;
-
-import static org.junit.Assert.*;
 
 public class BasicGameFieldTest {
 
@@ -24,18 +20,20 @@ public class BasicGameFieldTest {
         File file = new File("circuitoLineare.txt");
         FileReader fileReader = new FileReader(file);
         CircuitReaderBasic reader= new CircuitReaderBasic(fileReader);
-        GameFieldCreator<GridLocation> fieldCreator = new BasicGameFieldCreator();
         PlayerCreator<GridLocation> playerCreator = new BotPlayerCreator<>();
+        GameFieldCreator<GridLocation> fieldCreator = new BasicGameFieldCreator(playerCreator);
+
         int[][] track = reader.createCircuit();
         int height= reader.getTrackHeight();
         int width= reader.getTrackWidth();
 
-        BasicGameField field = (BasicGameField) fieldCreator.createGameField(width, height, track);
         Deque<String> names = reader.namePlayers();
-        Player<GridLocation> player1 = field.addPlayer(playerCreator.createPlayer(names.poll()));
-        Player<GridLocation> player2 = field.addPlayer(playerCreator.createPlayer(names.poll()));
-        Player<GridLocation> player3 = field.addPlayer(playerCreator.createPlayer(names.poll()));
-        Player<GridLocation> player4 = field.addPlayer(playerCreator.createPlayer(names.poll()));
+        BasicGameField field = (BasicGameField) fieldCreator.createGameField(width, height, track, names);
+
+        Player<GridLocation> player1 = field.getPlayers().stream().filter(p -> p.getName()=="Piero").findFirst().get();
+        Player<GridLocation> player2 = field.getPlayers().stream().filter(p -> p.getName()=="Testoli").findFirst().get();
+        Player<GridLocation> player3 = field.getPlayers().stream().filter(p -> p.getName()=="Mozz").findFirst().get();
+        Player<GridLocation> player4 = field.getPlayers().stream().filter(p -> p.getName()=="Cika").findFirst().get();
         Assertions.assertThrows(NullPointerException.class, () -> field.addPlayer(playerCreator.createPlayer("Asdrubale")));
         Assertions.assertThrows(IllegalArgumentException.class, () -> field.addPlayer(playerCreator.createPlayer("Piero")));
 

@@ -1,7 +1,6 @@
 package it.unicam.cs.pa2021.formulaUno.model.printer;
 
 import it.unicam.cs.pa2021.formulaUno.model.BasicGameField;
-import it.unicam.cs.pa2021.formulaUno.model.Car;
 import it.unicam.cs.pa2021.formulaUno.model.CornerStatus;
 import it.unicam.cs.pa2021.formulaUno.model.GridLocation;
 
@@ -18,18 +17,14 @@ public class BasicGameFieldPrinter implements GameFieldPrinter<BasicGameField, G
         Deque<Character> characterDeque = new ArrayDeque<>();
         for(int row=0; row<gameField.getHeight(); row++){
             for(int col=0; col< gameField.getWidth(); col++){
-                if(gameField.getCornerAt(new GridLocation(col, row)).getStatus()== CornerStatus.OUT_OF_RACE)
+                if(gameField.isThereACar(new GridLocation(col, row)))
+                    characterDeque.add('c');
+                else if(gameField.getCornerAt(new GridLocation(col, row)).getStatus()== CornerStatus.OUT_OF_RACE)
                     characterDeque.add('X');
                 else if(gameField.getCornerAt(new GridLocation(col, row)).getStatus()== CornerStatus.IN_RACE)
                     characterDeque.add('-');
                 else if(gameField.getCornerAt(new GridLocation(col, row)).getStatus()==CornerStatus.GOAL)
                     characterDeque.add('*');
-                int finalCol = col;
-                int finalRow = row;
-                if(gameField.getCars(Car::isInRace).stream().anyMatch(c -> c.getCurrentLocation().equals(new GridLocation(finalCol, finalRow)))){
-                    characterDeque.removeLast();
-                    characterDeque.add('c');
-                }
             }
             characterDeque.add('\n');
         }

@@ -29,7 +29,7 @@ public class ConsoleView <T extends GameField<L>, L extends Location> implements
     @Override
     public void printGameField(T field) {
         printMatrix(field);
-        if(field.getState())
+        if(!field.getState())
             goodByes(field);
     }
 
