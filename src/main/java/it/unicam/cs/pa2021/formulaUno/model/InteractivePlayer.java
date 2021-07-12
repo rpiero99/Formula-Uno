@@ -3,21 +3,17 @@ package it.unicam.cs.pa2021.formulaUno.model;
 import java.util.Objects;
 
 /**
- * Classe che implementa un giocatore bot.
+ * Classe che implementa un giocatore interattivo, ossia guidato dall'utente.
+ * @param <L> tipo per la posizione di un angolo
  */
-public class BotPlayer<L extends Location> implements Player<L> {
+public class InteractivePlayer<L extends Location> implements Player<L>{
 
     private boolean isWinner;
+    private Car<L> car;
     private final String name;
     private final GameField<L> field;
-    private Car<L> car;
-    
-    /**
-     * Construttore per un giocatore bot.
-     * @param name nome del giocatore.
-     * @param field
-     */
-    public BotPlayer(String name, GameField<L> field) {
+
+    public InteractivePlayer(String name, GameField<L> field) {
         this.name = name;
         this.field = field;
         this.isWinner = false;
@@ -30,13 +26,13 @@ public class BotPlayer<L extends Location> implements Player<L> {
 
     @Override
     public GameField<L> getGameField() {
-        return this.field;
+        return field;
     }
 
     @Override
     public Car<L> createNewCar(L initialLocation) {
         this.car = new SimpleCar<>(initialLocation);
-        return getCar();
+        return car;
     }
 
     @Override
@@ -46,12 +42,12 @@ public class BotPlayer<L extends Location> implements Player<L> {
 
     @Override
     public boolean isWinner() {
-        return this.isWinner;
+        return isWinner;
     }
 
     @Override
     public void setWinner(boolean winner) {
-        this.isWinner = winner;
+        isWinner = winner;
     }
 
     @Override
@@ -63,12 +59,12 @@ public class BotPlayer<L extends Location> implements Player<L> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BotPlayer botPlayer = (BotPlayer) o;
-        return name.equals(botPlayer.name);
+        InteractivePlayer<?> that = (InteractivePlayer<?>) o;
+        return name.equals(that.name) && field.equals(that.field);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(name, field);
     }
 }

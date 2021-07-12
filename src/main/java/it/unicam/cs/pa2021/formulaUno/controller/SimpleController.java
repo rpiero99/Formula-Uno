@@ -37,14 +37,6 @@ public class SimpleController<T extends GameField<L>, L extends Location> implem
     }
 
     @Override
-    public void makeMoves(){
-        for(Player<L> player : getGameField().getPlayers()){
-            if(player.getCar().isInRace())
-                addMove(player.moveCarTo(getGameField().getNextPossibleMoves(player.getCar())));
-        }
-    }
-
-    @Override
     public void addMove(Move<L> move) {
         this.gameField.addMove(move);
     }

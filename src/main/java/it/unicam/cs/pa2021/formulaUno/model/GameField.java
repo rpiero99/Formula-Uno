@@ -95,13 +95,6 @@ public interface GameField<L extends Location> {
     void changeState(boolean state);
 
     /**
-     * Restituisce l'insieme di posizioni in cui il veicolo potr&agrave; spostarsi.
-     * @param car il veicolo di cui si vuole conoscere le prossime posizioni.
-     * @return l'insieme di posizioni in cui il veicolo potr&agrave; spostarsi.
-     */
-    Set<L> getNextPossibleMoves (Car<L> car);
-
-    /**
      * Restituisce tutte le mosse fatte dai giocatori in questo turno.
      * @return le mosse fatte dai giocatori.
      */

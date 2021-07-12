@@ -1,8 +1,6 @@
 package it.unicam.cs.pa2021.formulaUno.controller;
 
-import it.unicam.cs.pa2021.formulaUno.model.BasicGameField;
-import it.unicam.cs.pa2021.formulaUno.model.CircuitReaderBasic;
-import it.unicam.cs.pa2021.formulaUno.model.GridLocation;
+import it.unicam.cs.pa2021.formulaUno.model.*;
 import it.unicam.cs.pa2021.formulaUno.model.creator.BasicGameFieldCreator;
 import it.unicam.cs.pa2021.formulaUno.model.creator.BotPlayerCreator;
 import it.unicam.cs.pa2021.formulaUno.model.creator.GameFieldCreator;
@@ -47,7 +45,9 @@ public class SimpleControllerTest {
         controller.viewGameField();
 
         while (controller.getGameField().getState()){
-            controller.makeMoves();
+            for (Player<GridLocation> pl: controller.getGameField().getPlayers()) {
+                pl.moveCarTo(pl.randomChoice());
+            }
             controller.nextStage();
             controller.viewGameField();
         }

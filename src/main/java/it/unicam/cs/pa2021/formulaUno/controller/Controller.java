@@ -31,11 +31,6 @@ public interface Controller<T extends GameField<L>, L extends Location> {
     Player<L> addPlayer(Player<L> player);
 
     /**
-     * Dice ai giocatori di fare le mosse in questo turno e di aggiungere al metodo addMove().
-     */
-    void makeMoves();
-
-    /**
      * Aggiunge un movimento di un veicolo fatto da un giocatore in questo turno.
      * @param move movimento da registrare.
      */

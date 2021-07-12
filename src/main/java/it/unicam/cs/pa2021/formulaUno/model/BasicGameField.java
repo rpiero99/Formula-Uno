@@ -115,11 +115,6 @@ public class BasicGameField implements GameField<GridLocation> {
     }
 
     @Override
-    public Set<GridLocation> getNextPossibleMoves(Car<GridLocation> car) {
-        return car.getCurrentLocation().nextPossibleLocations(car, this);
-    }
-
-    @Override
     public Set<Move<GridLocation>> getMoves() {
         return this.moves;
     }

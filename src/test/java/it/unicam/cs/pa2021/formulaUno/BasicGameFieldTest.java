@@ -30,17 +30,17 @@ public class BasicGameFieldTest {
         Deque<String> names = reader.namePlayers();
         BasicGameField field = (BasicGameField) fieldCreator.createGameField(width, height, track, names);
 
-        Player<GridLocation> player1 = field.getPlayers().stream().filter(p -> p.getName()=="Piero").findFirst().get();
-        Player<GridLocation> player2 = field.getPlayers().stream().filter(p -> p.getName()=="Testoli").findFirst().get();
-        Player<GridLocation> player3 = field.getPlayers().stream().filter(p -> p.getName()=="Mozz").findFirst().get();
-        Player<GridLocation> player4 = field.getPlayers().stream().filter(p -> p.getName()=="Cika").findFirst().get();
-        Assertions.assertThrows(NullPointerException.class, () -> field.addPlayer(playerCreator.createPlayer("Asdrubale")));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> field.addPlayer(playerCreator.createPlayer("Piero")));
+        BotPlayer<GridLocation> player1 = (BotPlayer<GridLocation>) field.getPlayers().stream().filter(p -> p.getName()=="Piero").findFirst().get();
+        BotPlayer<GridLocation> player2 = (BotPlayer<GridLocation>) field.getPlayers().stream().filter(p -> p.getName()=="Testoli").findFirst().get();
+        BotPlayer<GridLocation> player3 = (BotPlayer<GridLocation>) field.getPlayers().stream().filter(p -> p.getName()=="Mozz").findFirst().get();
+        BotPlayer<GridLocation> player4 = (BotPlayer<GridLocation>) field.getPlayers().stream().filter(p -> p.getName()=="Cika").findFirst().get();
+        Assertions.assertThrows(NullPointerException.class, () -> field.addPlayer(playerCreator.createPlayer("Asdrubale", field)));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> field.addPlayer(playerCreator.createPlayer("Piero", field)));
 
-        Move<GridLocation> move1 = player1.moveCarTo(field.getNextPossibleMoves(player1.getCar()));
-        Move<GridLocation> move2 = player2.moveCarTo(field.getNextPossibleMoves(player2.getCar()));
-        Move<GridLocation> move3 = player3.moveCarTo(field.getNextPossibleMoves(player3.getCar()));
-        Move<GridLocation> move4 = player4.moveCarTo(field.getNextPossibleMoves(player4.getCar()));
+        Move<GridLocation> move1 = player1.moveCarTo(player1.randomChoice());
+        Move<GridLocation> move2 = player2.moveCarTo(player2.randomChoice());
+        Move<GridLocation> move3 = player3.moveCarTo(player3.randomChoice());
+        Move<GridLocation> move4 = player4.moveCarTo(player4.randomChoice());
 
         field.addMove(move1);
         field.addMove(move2);
@@ -49,22 +49,22 @@ public class BasicGameFieldTest {
         field.nextStage();
 
         if(player1.getCar().isInRace()){
-            move1 = player1.moveCarTo(field.getNextPossibleMoves(player1.getCar()));
+            move1 = player1.moveCarTo(player1.randomChoice());
             field.addMove(move1);
         }
 
         if(player2.getCar().isInRace()){
-            move2 = player2.moveCarTo(field.getNextPossibleMoves(player2.getCar()));
+            move2 = player2.moveCarTo(player2.randomChoice());
             field.addMove(move2);
         }
 
         if(player3.getCar().isInRace()){
-            move3 = player3.moveCarTo(field.getNextPossibleMoves(player3.getCar()));
+            move3 = player3.moveCarTo(player3.randomChoice());
             field.addMove(move3);
         }
 
         if(player4.getCar().isInRace()){
-            move4 = player4.moveCarTo(field.getNextPossibleMoves(player4.getCar()));
+            move4 = player4.moveCarTo(player4.randomChoice());
             field.addMove(move4);
         }
 
