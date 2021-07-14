@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Deque;
+import java.util.Optional;
 
 public class BasicGameFieldTest {
 
@@ -37,10 +38,10 @@ public class BasicGameFieldTest {
         Assertions.assertThrows(NullPointerException.class, () -> field.addPlayer(playerCreator.createPlayer("Asdrubale", field)));
         Assertions.assertThrows(IllegalArgumentException.class, () -> field.addPlayer(playerCreator.createPlayer("Piero", field)));
 
-        Move<GridLocation> move1 = player1.moveCarTo(player1.randomChoice());
-        Move<GridLocation> move2 = player2.moveCarTo(player2.randomChoice());
-        Move<GridLocation> move3 = player3.moveCarTo(player3.randomChoice());
-        Move<GridLocation> move4 = player4.moveCarTo(player4.randomChoice());
+        Move<GridLocation> move1 = player1.moveCarTo(Optional.empty());
+        Move<GridLocation> move2 = player2.moveCarTo(Optional.empty());
+        Move<GridLocation> move3 = player3.moveCarTo(Optional.empty());
+        Move<GridLocation> move4 = player4.moveCarTo(Optional.empty());
 
         field.addMove(move1);
         field.addMove(move2);
@@ -49,22 +50,22 @@ public class BasicGameFieldTest {
         field.nextStage();
 
         if(player1.getCar().isInRace()){
-            move1 = player1.moveCarTo(player1.randomChoice());
+            move1 = player1.moveCarTo(Optional.empty());
             field.addMove(move1);
         }
 
         if(player2.getCar().isInRace()){
-            move2 = player2.moveCarTo(player2.randomChoice());
+            move2 = player2.moveCarTo(Optional.empty());
             field.addMove(move2);
         }
 
         if(player3.getCar().isInRace()){
-            move3 = player3.moveCarTo(player3.randomChoice());
+            move3 = player3.moveCarTo(Optional.empty());
             field.addMove(move3);
         }
 
         if(player4.getCar().isInRace()){
-            move4 = player4.moveCarTo(player4.randomChoice());
+            move4 = player4.moveCarTo(Optional.empty());
             field.addMove(move4);
         }
 

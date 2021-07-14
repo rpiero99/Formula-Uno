@@ -5,6 +5,7 @@ import it.unicam.cs.pa2021.formulaUno.model.GameField;
 import it.unicam.cs.pa2021.formulaUno.model.Location;
 import it.unicam.cs.pa2021.formulaUno.model.Move;
 import it.unicam.cs.pa2021.formulaUno.model.Player;
+import it.unicam.cs.pa2021.formulaUno.view.View;
 
 /**
  * Controller del pattern MVC, che coordina le azioni da eseguire ad un game field, attraverso la definizione di una view.
@@ -16,6 +17,12 @@ public interface Controller<T extends GameField<L>, L extends Location> {
      * Applica al game field associato i movimenti fatti dai giocatori in questo turno.
      */
     void nextStage();
+
+    /**
+     * Registra al controller una view specifica.
+     * @param view da associare al controller.
+     */
+    void recordView(View<T, L> view);
 
     /**
      * Restituisce il game field associato al controller.

@@ -12,6 +12,7 @@ import it.unicam.cs.pa2021.formulaUno.view.View;
 import org.junit.Test;
 
 import java.io.*;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -40,17 +41,20 @@ public class SimpleControllerTest {
         field = (BasicGameField) fieldCreator.createGameField(width, height, track, reader.namePlayers());
         View<BasicGameField, GridLocation> view = new ConsoleView<>(in, printer);
 
-        controller = new SimpleController<>(view, field);
+        controller = new SimpleController<>(field);
+        controller.recordView(view);
         assertNotNull(controller.getGameField());
         controller.viewGameField();
 
         while (controller.getGameField().getState()){
             for (Player<GridLocation> pl: controller.getGameField().getPlayers()) {
-                pl.moveCarTo(pl.randomChoice());
+                if(pl.getCar().isInRace())
+                    controller.addMove(pl.moveCarTo(Optional.empty()));
             }
             controller.nextStage();
             controller.viewGameField();
         }
+        controller.closeView();
     }
 
 
