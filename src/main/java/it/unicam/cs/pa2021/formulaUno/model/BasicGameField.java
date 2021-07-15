@@ -2,6 +2,7 @@ package it.unicam.cs.pa2021.formulaUno.model;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
  */
 public class BasicGameField implements GameField<GridLocation> {
 
+    private final Logger logger = Logger.getLogger("it.unicam.cs.pa2021.formulaUno.model.BasicGameField");
     private final Corner<GridLocation>[][] cornerGrid;
     private final int width;
     private final int height;
@@ -190,8 +192,10 @@ public class BasicGameField implements GameField<GridLocation> {
     private void checkCollision() {
         for (Car<GridLocation> car: getCars(Car::isInRace)) {
             GridLocation current = car.getCurrentLocation();
-            if(getCornerAt(current).getStatus()==CornerStatus.OUT_OF_RACE || getCars().stream().filter(a -> a.getCurrentLocation().equals(current)).count()>1)
+            if(getCornerAt(current).getStatus()==CornerStatus.OUT_OF_RACE || getCars().stream().filter(a -> a.getCurrentLocation().equals(current)).count()>1){
                 car.changeStatus(false);
+                logger.info("Macchina entrata in collisione");
+            }
         }
     }
 
@@ -214,5 +218,6 @@ public class BasicGameField implements GameField<GridLocation> {
                     this.cornerGrid[row][column] = new BasicCorner<>(this, CornerStatus.OUT_OF_RACE, new GridLocation(column, row));
             }
         }
+        logger.info("Campo creato correttamente");
     }
 }

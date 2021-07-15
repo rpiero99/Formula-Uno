@@ -47,12 +47,14 @@ public class App {
         controller.viewGameField();
 
         while (controller.getGameField().getState()) {
-            for (Player<GridLocation> pl : controller.getGameField().getPlayers()) {
-                if (pl.getCar().isInRace())
-                    controller.addMove(pl.moveCarTo(Optional.empty()));
+            if (in.nextInt() == 0) {
+                for (Player<GridLocation> pl : controller.getGameField().getPlayers()) {
+                    if (pl.getCar().isInRace())
+                        controller.addMove(pl.moveCarTo(Optional.empty()));
+                }
+                controller.nextStage();
+                controller.viewGameField();
             }
-            controller.nextStage();
-            controller.viewGameField();
         }
         controller.closeView();
     }
@@ -71,6 +73,8 @@ public class App {
     }
 
     private static void menu() {
+        System.out.println("****************************************************");
+        System.out.println("**                  FORMULA UNO                    **");
         System.out.println("Ciao, prima di iniziare a giocare scegli un circuito");
         System.out.println("Digita 1 : circuito (piccolo, 3 giocatori)");
         System.out.println("Digita 2 : circuitoLineare (medio, 4 giocatori)");
