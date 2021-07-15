@@ -153,6 +153,7 @@ public class BasicGameField implements GameField<GridLocation> {
             clearMoves();
             checkCollision();
             checkWinner();
+            logger.info("Prossimo turno...");
         }
         else
             throw new IllegalStateException("La gara è terminata, non si possono fare altre mosse");
@@ -173,12 +174,14 @@ public class BasicGameField implements GameField<GridLocation> {
                 car.changeStatus(false);
                 getPlayers().stream().filter(p -> p.getCar().equals(car)).forEach(p -> p.setWinner(true));
                 this.changeState(false);
+                logger.info("Partita finita, abbiamo un vincitore");
             }
         }
 
         if(getCars(Car::isInRace).size()==1){
             getPlayers().stream().filter(p -> p.getCar().isInRace()).forEach(p -> p.setWinner(true));
             this.changeState(false);
+            logger.info("Partita finita, abbiamo un vincitore");
         }
 
         else if(getCars(Car::isInRace).size()==0)
