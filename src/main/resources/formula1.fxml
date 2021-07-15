@@ -59,8 +59,8 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <ComboBox id="comboBoxChoiceFields" fx:id="comboBoxChoiceFields" layoutX="245.0" layoutY="57.0" onAction="#clickComboBox" prefWidth="150.0" />
-            <Button fx:id="nextButton" layoutX="294.0" layoutY="278.0" mnemonicParsing="false" onAction="#clickContinue" text="Continua" />
+            <ComboBox id="comboBoxChoiceFields" fx:id="comboBoxChoiceFields" layoutX="245.0" layoutY="57.0" prefWidth="150.0" />
+            <Button id="buttonContinue" layoutX="294.0" layoutY="278.0" mnemonicParsing="false" onAction="#clickContinue" text="Continua" />
       </children>
     </AnchorPane>
   </children>
