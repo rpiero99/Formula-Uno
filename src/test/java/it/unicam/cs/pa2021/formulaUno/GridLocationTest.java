@@ -10,7 +10,7 @@ public class GridLocationTest extends TestCase {
     public void testNextPossibleLocations() {
         GridLocation firstLoc = new GridLocation(8,2);
         GameField<GridLocation> field = new BasicGameField(10,20,new int[20][10]);
-        Player<GridLocation> player = field.addPlayer(new BotPlayer("Arfonso", field));
+        BotPlayer<GridLocation> player = (BotPlayer<GridLocation>) field.addPlayer(new BotPlayer("Arfonso", field));
         Car<GridLocation> car= player.createNewCar(firstLoc);
         car.moveToNewLocation(new GridLocation(6,4));
         Set<GridLocation> nextLocations = car.getCurrentLocation().nextPossibleLocations(car, field);
