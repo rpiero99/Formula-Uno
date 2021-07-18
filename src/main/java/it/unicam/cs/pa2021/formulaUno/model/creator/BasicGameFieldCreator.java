@@ -15,6 +15,10 @@ public class BasicGameFieldCreator implements GameFieldCreator<GridLocation> {
     private final PlayerCreator<GridLocation> playerCreator;
     private final Logger logger = Logger.getLogger("it.unicam.cs.pa2021.formulaUno.model.creator.BasicGameFieldCreator");
 
+    /**
+     * Costruttore del basic game field creator.
+     * @param playerCreator creator per i giocatori del game field.
+     */
     public BasicGameFieldCreator(PlayerCreator<GridLocation> playerCreator) {
         this.playerCreator = playerCreator;
     }

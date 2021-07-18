@@ -48,6 +48,14 @@ public class CircuitReaderBasic implements CircuitReader {
         return this.height;
     }
 
+    /**
+     * Costruisce il circuito leggendo il buffered reader associato al file.
+     * @param in buffered reader associato al file.
+     * @param width larghezza del game field.
+     * @param height altezza del game field.
+     * @return una matrice di int, utile poi al game field.
+     * @throws IOException
+     */
     private int[][] buildCircuit(BufferedReader in, int width, int height) throws IOException {
         int[][] circuit = new int[height][width];
 

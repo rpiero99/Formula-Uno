@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Classe che implementa un giocatore interattivo, ossia guidato dall'utente. Ad un utente interattivo deve essere sempre passata
  * una nuova posizione per la macchina (non ha la funzione random che ha un bot player).
- * @param <L> tipo per la posizione di un angolo
+ * @param <L> tipo per la posizione di un angolo.
  */
 public class InteractivePlayer<L extends Location> implements Player<L>{
 

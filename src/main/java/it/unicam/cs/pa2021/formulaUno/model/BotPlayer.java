@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * Classe che implementa un giocatore bot.
+ * Classe che implementa un giocatore bot, non controllato quindi da un utente.
  */
 public class BotPlayer<L extends Location> implements Player<L> {
 
@@ -52,7 +52,7 @@ public class BotPlayer<L extends Location> implements Player<L> {
      * Metodo che sceglie attraverso una funzione random la prossima posizione da occupare per il veicolo.
      * @return la prossima posizione del veicolo.
      */
-    L randomChoice() {
+    private L randomChoice() {
         Random random = new Random();
         return getNextPossibleMoves().stream().skip(random.nextInt(getNextPossibleMoves().size())).findFirst().get();
     }
