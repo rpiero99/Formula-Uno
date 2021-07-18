@@ -28,11 +28,6 @@ public interface Car<L extends Location> {
     void moveToNewLocation(L location);
 
     /**
-     * Cancella tutte le posizioni che il veicolo ha attraversato in una corsa.
-     */
-    void clearLocations();
-
-    /**
      * Cambia lo stato del veicolo: ad esempio se esso ha subito un incidente, isInRace sar&agrave; messo a false.
      * @param status nuovo stato del veicolo.
      */

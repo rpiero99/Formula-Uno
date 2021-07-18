@@ -40,11 +40,6 @@ public class SimpleCar<L extends Location> implements Car<L>{
     }
 
     @Override
-    public void clearLocations() {
-        this.locations.clear();
-    }
-
-    @Override
     public void changeStatus(boolean status) {
         isInRace=status;
     }
