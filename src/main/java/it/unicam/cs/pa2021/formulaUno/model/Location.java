@@ -2,6 +2,9 @@ package it.unicam.cs.pa2021.formulaUno.model;
 
 import java.util.Set;
 
+/**
+ * Interfaccia che definisce il tipo di una locazione in un GameField.
+ */
 public interface Location {
 
     /**
