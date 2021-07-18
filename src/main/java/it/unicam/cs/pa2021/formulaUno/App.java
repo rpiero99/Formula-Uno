@@ -27,14 +27,7 @@ public class App {
     public static void main(String[] args) throws IOException {
         menu();
         Scanner in = new Scanner(System.in);
-        CircuitReaderBasic readerBasic;
-        int choice = in.nextInt();
-        if (choice == 1)
-            readerBasic = initApp("circuito.txt");
-        else if (choice == 2)
-            readerBasic = initApp("circuitoLineare.txt");
-        else
-            throw new IllegalArgumentException("Devi digitare solamente uno dei numeri richiesti");
+        CircuitReaderBasic readerBasic = getCircuitReaderBasic(in);
 
         PlayerCreator<GridLocation> playerCreator = new BotPlayerCreator<>();
         GameFieldCreator<GridLocation> gameFieldCreator = new BasicGameFieldCreator(playerCreator);
@@ -46,7 +39,35 @@ public class App {
         Controller<BasicGameField, GridLocation> controller = setController(field, view);
         controller.viewGameField();
 
+        race(in, controller);
+    }
+
+    /**
+     * Scelta del circuito dal quale vedere la corsa.
+     * @param in scanner per l'input dell'utente.
+     * @return il reader appena creato.
+     * @throws FileNotFoundException
+     */
+    private static CircuitReaderBasic getCircuitReaderBasic(Scanner in) throws FileNotFoundException {
+        CircuitReaderBasic readerBasic;
+        int choice = in.nextInt();
+        if (choice == 1)
+            readerBasic = initApp("circuito.txt");
+        else if (choice == 2)
+            readerBasic = initApp("circuitoLineare.txt");
+        else
+            throw new IllegalArgumentException("Devi digitare solamente uno dei numeri richiesti");
+        return readerBasic;
+    }
+
+    /**
+     * Stampa ogni turno della gara (ogni volta che l'utente preme il tasto 0) fino a che non ci sia un vincitore (o che tutti vadano fuori pista).
+     * @param in scanner utile all'utente per scrivere da tastiera.
+     * @param controller controller dell'applicazione.
+     */
+    private static void race(Scanner in, Controller<BasicGameField, GridLocation> controller) {
         while (controller.getGameField().getState()) {
+            System.out.println("Premi 0 per continuare al prossimo turno");
             if (in.nextInt() == 0) {
                 for (Player<GridLocation> pl : controller.getGameField().getPlayers()) {
                     if (pl.getCar().isInRace())
@@ -59,6 +80,13 @@ public class App {
         controller.closeView();
     }
 
+    /**
+     * Crea e restituisce un game field da usare nell'applicazione.
+     * @param readerBasic generatore del circuito del game field.
+     * @param gameFieldCreator creator responsabile della creazione del game field.
+     * @return il game field appena creato.
+     * @throws IOException
+     */
     private static BasicGameField createGameField(CircuitReaderBasic readerBasic, GameFieldCreator<GridLocation> gameFieldCreator) throws IOException {
         int[][] track = readerBasic.createCircuit();
         int height = readerBasic.getTrackHeight();
@@ -66,6 +94,12 @@ public class App {
         return (BasicGameField) gameFieldCreator.createGameField(width, height, track, readerBasic.namePlayers());
     }
 
+    /**
+     * Inizializzatore del controller.
+     * @param field game field da associare al controller.
+     * @param view view da associare al controller.
+     * @return controller appena creato.
+     */
     private static Controller<BasicGameField, GridLocation> setController(BasicGameField field, View<BasicGameField, GridLocation> view) {
         Controller<BasicGameField, GridLocation> controller = new SimpleController<>(field);
         controller.recordView(view);
@@ -74,13 +108,19 @@ public class App {
 
     private static void menu() {
         System.out.println("****************************************************");
-        System.out.println("**                  FORMULA UNO                    **");
+        System.out.println("**                  FORMULA UNO                   **");
         System.out.println("Ciao, prima di iniziare a giocare scegli un circuito");
         System.out.println("Digita 1 : circuito (piccolo, 3 giocatori)");
         System.out.println("Digita 2 : circuitoLineare (medio, 4 giocatori)");
     }
 
-    public static CircuitReaderBasic initApp(String fileName) throws FileNotFoundException {
+    /**
+     * Metodo che serve ad inizializzare il reader.
+     * @param fileName nome del file da cui prendere il circuito.
+     * @return il nuovo reader.
+     * @throws FileNotFoundException
+     */
+    private static CircuitReaderBasic initApp(String fileName) throws FileNotFoundException {
         File file = new File(fileName);
         FileReader fileReader = new FileReader(file);
         return new CircuitReaderBasic(fileReader);
