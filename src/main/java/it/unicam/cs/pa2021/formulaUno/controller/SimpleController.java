@@ -8,6 +8,7 @@ import it.unicam.cs.pa2021.formulaUno.view.View;
 
 /**
  * Semplice controller per questa applicazione, che coordina le basiche azioni di sistema.
+ * @param <T> tipo di game field.
  * @param <L> tipo per la posizione di un angolo.
  */
 public class SimpleController<T extends GameField<L>, L extends Location> implements Controller<T, L>{
